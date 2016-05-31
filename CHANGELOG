@@ -1,0 +1,495 @@
+v1.7.8 May 10, 2016
+====================
+
+* Update Godep to v65
+  (https://www.pivotaltracker.com/story/show/119235111)
+
+* Remove fail case for govendor
+  the bin/compile script now does not fail if it detects govendor,
+  because govendor should comply with native go vendoring in
+  (https://www.pivotaltracker.com/story/show/119184383)
+
+* Allow go native vendoring to skip `vendor/` directory
+  Detect now has an "extra" option to allow an app with `.go` files and
+  $GOPACKAGENAME even if it is missing a vendor directory
+  (https://www.pivotaltracker.com/story/show/118519961)
+
+
+v1.7.7 Apr 26, 2016
+====================
+
+* Remove go1.4
+  (https://www.pivotaltracker.com/story/show/117556513)
+
+v1.7.6 Apr 22, 2016
+====================
+
+* Allow deploying of go apps without a Procfile
+  (https://www.pivotaltracker.com/story/show/117929711)
+
+* Add go 1.6.2, remove go 1.6
+  (https://www.pivotaltracker.com/story/show/117966791)
+
+* Allow native go vendoring
+  (https://www.pivotaltracker.com/story/show/117638407)
+
+commit e7a51484243a979d2534d1b27d63d8a7ede80581
+Author: David Jahn <david.a.jahn@gmail.com>
+Date:   Tue Apr 19 12:07:34 2016 -0400
+
+* Print a warning when the app uses go1.6 with vendor experiment and doesn't have a vendor dir
+  (https://www.pivotaltracker.com/story/show/117840949)
+
+* Fix bug where apps using go1.6 and ldflags could not stage
+  (https://www.pivotaltracker.com/story/show/117841169)
+
+v1.7.5 Apr 13, 2016
+====================
+
+* Add godep v62, remove godep v61
+  (https://www.pivotaltracker.com/story/show/117258211)
+
+* Add go 1.5.4, go 1.6.1, remove go 1.5.2
+  (https://www.pivotaltracker.com/story/show/117405095)
+
+v1.7.4 Apr 11, 2016
+====================
+
+* Bump Godep version to 0.61
+  (https://www.pivotaltracker.com/story/show/117078185)
+
+* Uses buildmode=pie for go 1.6+
+  (https://www.pivotaltracker.com/story/show/113966315)
+
+v1.7.3 Feb 29, 2016
+====================
+
+* Update godeps to v55
+  (https://www.pivotaltracker.com/story/show/114349455)
+
+* Add golang 1.6 and drop golang 1.4.1
+  (https://www.pivotaltracker.com/story/show/114349455)
+
+* Merge remote-tracking branch 'upstream/master' into develop
+  (https://github.com/cloudfoundry/go-buildpack/commit/06a5e8993e2db5bfa229d0f291caf2da1ab2ca18)
+
+* Merge pull request #31 from d-lorenc/develop
+  (https://github.com/cloudfoundry/go-buildpack/pull/31)
+
+  * fix typo
+
+* Merge pull request #1 from d-lorenc/d-lorenc-patch-1
+  (https://github.com/cloudfoundry/go-buildpack/pull/29)
+
+  * fix typo
+
+* Merge remote-tracking branch 'upstream/master' into develop
+  (https://github.com/cloudfoundry/go-buildpack/commit/22ef9108b89bac4813e033854af0b5a1484cabb)
+
+* Merge remote-tracking branch 'upstream/master' into develop
+  (https://github.com/cloudfoundry/go-buildpack/commit/964e433b37498d52d6ce69dec3e792e6d29c4bc9)
+
+
+* Merge remote-tracking branch 'upstream/master' into develop
+  (https://github.com/cloudfoundry/go-buildpack/commit/8319c0e0d24641b4885d5d56c522ebb853f36498)
+
+* Remove deprecation warnings from compile script.
+  (https://www.pivotaltracker.com/story/show/111837573)
+
+* Better support for go1.6*
+  (https://github.com/cloudfoundry/go-buildpack/commit/0a5492cb3e0d19ee688f1d6e353948300d95ac3b)
+
+  * Support GO15VENDOREXPERIMENT=0
+  * go.1.6 uses newer -X $GO_LINKER_SYMBOL=$GO_LINKER_VALUE ldflag, like 1.5
+
+v1.7.2 Jan 18, 2016
+====================
+
+* Add support for Go patch version wildcard matching.
+  (https://www.pivotaltracker.com/story/show/106117500)
+
+* Add support for go1.5.3 and remove support for go1.5.1
+  (https://www.pivotaltracker.com/story/show/111646892)
+
+* Updated to Godep v45.
+  (https://www.pivotaltracker.com/story/show/110776726)
+
+v1.7.1 Dec 17, 2015
+====================
+
+* Updated Godeps to v39.
+  (https://www.pivotaltracker.com/story/show/110324408)
+
+* Removed manifest-including-unsupported
+  (https://www.pivotaltracker.com/story/show/109537822)
+
+* Add support go 1.5.2, remove support 1.5
+  (https://www.pivotaltracker.com/story/show/109408302)
+
+* Merge remote-tracking branch 'upstream/master' into develop
+  (https://www.pivotaltracker.com/story/show/109618254)
+
+v1.7.0 Nov 16, 2015
+====================
+
+* Remove broken .godir support.
+  (https://www.pivotaltracker.com/story/show/108010602)
+
+* Developers should be given detailed, helpful instructions when they attempt
+  to stage an application whose dependency is not found in the manifest.
+  (https://www.pivotaltracker.com/story/show/107939104)
+
+* Drop support for golang 1.2.x and 1.3.x
+  (https://www.pivotaltracker.com/story/show/105512206)
+
+
+v1.6.3 Oct 16, 2015
+====================
+
+* adding support for Go 1.4.1 for upgrade paths
+  (https://www.pivotaltracker.com/story/show/105722210)
+
+* Adding Godep binary to the manifest
+  (https://www.pivotaltracker.com/story/show/103326142)
+
+* use new linker -X option format for go1.5
+
+v1.6.2 Sep 24, 2015
+====================
+
+* Add support for Go `1.4.3` and removed support for Go `1.4.1`
+(https://www.pivotaltracker.com/story/show/103969132)
+   
+   Go `1.4.3` is a security update for the following CVEs:
+   
+	* [CVE-2015-5739](https://go-review.googlesource.com/#/c/11772/)
+	  Content Length treated as valid header
+	
+	* [CVE-2015-5740](https://go-review.googlesource.com/#/c/11810/)
+	  Double content-length headers does not return 400 error
+	
+	* [CVE-2015-5741](https://go-review.googlesource.com/#/c/11810/)
+	    Additional hardening, not sending Content-Length w/Transfer-Encoding
+
+v1.6.1 Sep 14, 2015
+====================
+
+* Adding support for Go 1.5.1
+  (https://www.pivotaltracker.com/story/show/102971246)
+
+* Update default GOVERSION to 1.5.1 for .godir.
+  (https://www.pivotaltracker.com/story/show/103219562)
+
+
+v1.6.0 Aug 20, 2015
+====================
+
+* Output buildpack information in detect script.
+  (https://www.pivotaltracker.com/story/show/100757820)
+
+* Add go 1.5.
+  Remove go 1.1.x, which hasn't been updated since August 2013.
+  (https://www.pivotaltracker.com/story/show/101620562)
+
+
+v1.5.0 Jul 24, 2015
+====================
+
+* Basic Godeps/Godeps.json validation
+
+  Note that ./Godeps and .godir are deprecated.
+
+  (See README.md for additional notes about the Godeps upgrade.)
+
+* Include current stack in unsupported stack message
+  (https://www.pivotaltracker.com/story/show/98579464)
+
+* Remove vendored python interpreter
+  (https://www.pivotaltracker.com/story/show/94532204)
+
+* Defaults for GOMAXPROCS
+
+* Update godep
+
+  Includes at least:
+  * 64k line fixes
+  * godep diff
+  * Cross compiled with go 1.4.2 / gox (statically linked)
+
+* GOPATH "g" -> "go"
+
+v1.4.0 Jun 24, 2015
+====================
+
+* Remove lucid64 references from manifest.yml
+  (https://www.pivotaltracker.com/story/show/96135874)
+
+* Alert user about incompatible stack usage
+  (https://www.pivotaltracker.com/story/show/96590164)
+
+* Fail staging on missing resource
+  (https://www.pivotaltracker.com/story/show/95737420)
+
+* Update Godeps instructions
+  (https://www.pivotaltracker.com/story/show/94986104)
+
+v1.3.1 May 08, 2015
+====================
+
+* Bump buildpack-packager to support custom buildpack manifests.
+  (https://www.pivotaltracker.com/story/show/93717296)
+
+v1.3.0 Apr 22, 2015
+====================
+
+* Deprecated many go versions. Currently supported versions:
+ 	(https://www.pivotaltracker.com/story/show/90697198)
+	* 1.4.2
+	* 1.4.1
+	* 1.3.3
+	* 1.3.2
+	* 1.2.2
+	* 1.2.1
+	* 1.1.2
+	* 1.1.1
+
+* Merge upstream changes from Heroku up to SHA 98f37cce4924567a3e049dc36167e43c8c25f8f8
+	(https://www.pivotaltracker.com/story/show/90537736)
+
+v1.2.0 Mar 17, 2015
+====================
+
+* Support cflinuxfs2 stack.
+	(https://www.pivotaltracker.com/story/show/88174336)
+
+* Reference git repos by https in cf.Gemfile
+  (https://www.pivotaltracker.com/story/show/90365848)
+
+* Add checksum to `manifest.yml` for all binaries.
+  (https://www.pivotaltracker.com/story/show/89503120)
+
+
+commit 8aea0e7cbccdb4f4315d5d4ddd79e39be77389cf
+Author: JT Archie and Sai To Yeung <pair+jarchie+syeung@pivotal.io>
+Date:   Mon Mar 16 11:23:02 2015 -0400
+
+    update Gemfile to https:// [#90365848]
+
+commit 0084eeaef667ead48e60275bae6831a309bd3fe3
+Author: JT Archie <pair+jarchie@pivotal.io>
+Date:   Thu Mar 12 15:57:01 2015 -0400
+
+    Bump buildpack-packager [#90196104]
+
+commit 3f65030e4a4f8514a14e84816fd745d3024d5898
+Author: Sai To Yeung <pair+syeung@pivotal.io>
+Date:   Thu Mar 12 10:00:34 2015 -0400
+
+    Add test for 2 digit go versions
+
+commit 8949f2ef82102cac0cfb3099e79cc709838cdc1d
+Author: Jared Gordon and Sai To Yeung <pair+jgordon+syeung@pivotal.io>
+Date:   Thu Mar 12 09:26:34 2015 -0400
+
+    Further fix 2 digit versions with new compile extensions
+    
+    [#90128514]
+
+commit 989e6e5ad00c2e0053a7df44956e0f686a379a41
+Author: Jared Gordon and Sai To Yeung <pair+jgordon+syeung@pivotal.io>
+Date:   Wed Mar 11 17:34:23 2015 -0400
+
+    Fix failures on go versions with only 2 digits
+    
+    [#90128514]
+
+commit 76c21c5c751717e2d851d6ebc4dd6c6332a3f351
+Author: Anthony Emengo <pair+aemengo@pivotal.io>
+Date:   Tue Mar 10 11:16:35 2015 -0400
+
+    Migrate relevant dependencies to cloudfoundry-incubator
+    
+    [#89014508]
+
+commit 48efa6206cb1fe3401d1996fb876d5ea72b6fc7f
+Author: Colin Jackson and Rasheed Abdul-Aziz <pair+crawsible+squeedee@pivotal.io>
+Date:   Fri Mar 6 16:12:02 2015 -0500
+
+    Update compile extensions
+    
+    [#89756284]
+
+commit 285b7c3b2aa76c38f827047af9b29e4ab0f24c71
+Author: Anthony Emengo and Jared Gordon <pair+aemengo+jgordon@pivotal.io>
+Date:   Thu Mar 5 17:10:31 2015 -0500
+
+    Add md5 checksums to all dependencies
+    
+    [#89503120]
+
+commit f06212fc42c706ebda23fce35c348da0717afcdc
+Author: Anthony Emengo and Sai To Yeung <pair+aemengo+syeung@pivotal.io>
+Date:   Fri Feb 27 12:27:11 2015 -0500
+
+    Do not use 'all' for cf_stacks
+    
+    [#88174336]
+
+commit 21e8c152281fb1c2cdd6bf6a183ccf1ee4c3aa93
+Author: Mike Dalessio <mike.dalessio@gmail.com>
+Date:   Thu Feb 26 20:50:26 2015 -0500
+
+    Testing Github → Tracker integration
+    
+    [#89253462]
+
+commit e792d229888463a0ddaa820995f203432bb74fa2
+Author: Anthony Emengo and Sai To Yeung <pair+aemengo+syeung@pivotal.io>
+Date:   Thu Feb 26 17:22:05 2015 -0500
+
+    Update compile-extensions to point to master
+
+commit d3a5a92b0563a5fa1db5fb8d75712a2a12f4f3d3
+Author: Anthony Emengo and Sai To Yeung <pair+aemengo+syeung@pivotal.io>
+Date:   Thu Feb 26 10:43:35 2015 -0500
+
+    Replace input to translate_dependency_url from url to version.
+    
+    - So no internet traffic is logged for offline environment with
+    dependencies that are not present in the manifest
+    
+    [#89198726]
+
+commit bbed630d97cdcd6385c3c8d07c967e0e82e882fc
+Author: Colin Jackson and Rasheed Abdul-Aziz <pair+crawsible+squeedee@pivotal.io>
+Date:   Wed Feb 25 18:02:10 2015 -0500
+
+    bump compile extensions
+
+commit 22633724e0066a9a1bf73c7ad93af6767943053f
+Merge: 6c794c7 e024177
+Author: Colin Jackson and Rasheed Abdul-Aziz <pair+crawsible+squeedee@pivotal.io>
+Date:   Wed Feb 25 17:26:39 2015 -0500
+
+    Merge branch 'master' of https://github.com/cloudfoundry/go-buildpack
+    
+    [#88174336]
+
+commit 6c794c7aa6af0bc2e31dbc92e50cb0df64b36711
+Author: Colin Jackson and Rasheed Abdul-Aziz <pair+crawsible+squeedee@pivotal.io>
+Date:   Wed Feb 25 17:21:30 2015 -0500
+
+    Update manifest.yml to support dependency-switching logic
+    
+    - compile extensions now points to rootfs-sensitive commit
+    
+    [#88174336]
+
+
+v1.1.2 Feb 02, 2015
+====================
+
+* Update documentation for use in offline environments
+  (https://www.pivotaltracker.com/story/show/86952360)
+
+* Support version 1.4.1
+* Default to version 1.4.1 if no version specified
+  (https://www.pivotaltracker.com/story/show/86334724)
+
+* Update buildpack-packager to v.2.0.0
+  (https://www.pivotaltracker.com/story/show/84805200)
+
+* Merged upstream changes
+  * Remove use of GO_GIT_DESCRIBE_SYMBOL
+  (https://github.com/cloudfoundry/go-buildpack/commits/d36476a80efb196676091c07acfe54e4443f974e3)
+
+v1.1.1 Dec 16, 2014
+====================
+
+* Introduce versioned manifest.yml
+  (https://www.pivotaltracker.com/story/show/84330748)
+
+* Merged pull request
+  (https://github.com/cloudfoundry/go-buildpack/commits/d4d37d93a2220fb7ee63a7252894afca308756a9)
+
+* Merge upstream changes
+  * use Go 1.4 when Godep is not present
+    (https://github.com/kr/heroku-buildpack-go/commits/3a2cc0fa0e3f12f4920d9bec1f6744e4261d4c7f)
+
+v1.1.0 Dec 09, 2014
+====================
+
+* Merge upstream changes
+  (https://www.pivotaltracker.com/story/show/83960140)
+  * Update Godep
+    (https://github.com/kr/heroku-buildpack-go/commit/6ddc65c22aad89eb449dbbb903f31818fd9d0a1c)
+  * GO_GIT_DESCRIBE_SYMBOL is no longer a special case
+    (https://github.com/kr/heroku-buildpack-go/commit/abcb5af1c533e50c64de6ed95f8b413b71f457a0)
+    (https://github.com/cloudfoundry/go-buildpack/commit/b3804c9b2ed7b5973c83b025ffac481b78a67bb8)
+
+* Introduce new offline dependency packaging system
+  (https://www.pivotaltracker.com/story/show/82513994)
+  (https://www.pivotaltracker.com/story/show/83886038)
+
+* Introduce new runtime dependency translation system
+  (https://www.pivotaltracker.com/story/show/82513994)
+  (https://www.pivotaltracker.com/story/show/83483872)
+  (https://www.pivotaltracker.com/story/show/83504664)
+
+* Update the README with Machete instructions
+  (https://www.pivotaltracker.com/story/show/82692644)
+
+v1.0.4 Oct 06, 2014
+====================
+
+* Added support for golang 1.3.(1,2,3) for offline buildpacks.
+  (https://www.pivotaltracker.com/story/show/79993432)
+  (https://github.com/cloudfoundry/go-buildpack/pull/8)
+
+v1.0.3 Sep 30, 2014
+====================
+
+Resolve broken buildpack version output.
+  (https://www.pivotaltracker.com/story/show/79781536)
+  (https://www.pivotaltracker.com/n/projects/966314/stories/79702506)
+
+
+v1.0.2 Sep 24, 2014
+====================
+
+* Update buildpack-packager
+  (https://www.pivotaltracker.com/story/show/78505368)
+  (https://www.pivotaltracker.com/story/show/79126294)
+  (https://www.pivotaltracker.com/story/show/77627098)
+  (https://www.pivotaltracker.com/story/show/75617248)
+
+* No longer compile python
+  (https://www.pivotaltracker.com/story/show/74540660)
+
+* Merge upstream changes
+  * idempotent symlink
+  * Update virtualenv
+  * Export cgo flags for build if present in user's app config
+  * Go 1.3
+
+v1.0.1 Jul 21, 2014
+====================
+
+* Added support for Go 1.2.2 and 1.3 for offline buildpack
+
+* Update the Go buildpack readme for CF usage
+  (https://www.pivotaltracker.com/story/show/72806138)
+
+* Switch to new Cloud Foundry offline dependency framework
+  (https://www.pivotaltracker.com/story/show/73384096)
+
+* Use Ruby 2.1.1
+
+v1.0.0 Jangelog (see section on Changelogs)
+git add .
+git commit -m "Bump version to `cat VERSION`"
+git pushn 17, 2014
+===================
+
+* Modify [KRs Go buildpack](https://github.com/kr/heroku-buildpack-go) to
+  support offline mode.
