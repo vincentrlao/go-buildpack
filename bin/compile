@@ -347,19 +347,20 @@ buildpack_bin=$buildpack/bin
 echo "*********************************************"
 echo "Build folder : $build"
 echo "Cache folder : $cache"
+echo "Home: $HOME"
 echo "*********************************************"
 #ls  $buildpack
 #ls  $buildpack_bin
 
 # Extract luna libs
-luna_libs_folder="/usr/safenet/lunaclient"
+luna_libs_folder=$buildpack/lib
 echo "Creating luna lib folder"
 mkdir -p $luna_libs_folder
 echo "Extracting luna libs"
 tar xvf $buildpack/lib/luna_security_provider_lib.tar -C $luna_libs_folder
 ls $buildpack
 echo "*********************************************"
-ls /lib 
+
 
 
 #sleep 5
