@@ -1,5 +1,5 @@
 echo "++++++++++++++++++++++++++++++++"
-echo "Luna setup started"
+echo "Luna setup starting ..."
 echo "++++++++++++++++++++++++++++++++"
 
 
