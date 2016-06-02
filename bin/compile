@@ -364,7 +364,7 @@ ls $buildpack
 echo "*********************************************"
 echo "*********************************************"
 echo "Create certificate"
-#ip addr
+ip addr
 #ifconfig
 
 
