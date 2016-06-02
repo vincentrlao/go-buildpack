@@ -348,6 +348,12 @@ echo "*********************************************"
 echo "Build folder: $build"
 echo "Cache folder: $cache"
 echo "*********************************************"
+#ls  $buildpack
+#ls  $buildpack_bin
+
+# Extract luna libs
+tar xvf $builbpack/lib/luna_security_provider_lib.tar $buildpack
+ls $buildpack
 
 #sleep 5
 #if [ -f $buildpack_bin/luna_setup.sh ];
