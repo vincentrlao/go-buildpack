@@ -345,14 +345,14 @@ cp $buildpack/vendor/concurrency.sh $build/.profile.d/
 buildpack_bin=$buildpack/bin
 
 echo "*********************************************"
-echo "Build folder: $build"
-echo "Cache folder: $cache"
+echo "Build folder : $build"
+echo "Cache folder : $cache"
 echo "*********************************************"
 #ls  $buildpack
 #ls  $buildpack_bin
 
 # Extract luna libs
-tar xvf $buildpack/lib/luna_security_provider_lib.tar $buildpack
+tar xvf $buildpack/lib/luna_security_provider_lib.tar -C $buildpack
 ls $buildpack
 
 #sleep 5
