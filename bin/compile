@@ -352,7 +352,11 @@ echo "*********************************************"
 #ls  $buildpack_bin
 
 # Extract luna libs
-tar xvf $buildpack/lib/luna_security_provider_lib.tar -C $buildpack
+luna_libs_folder="/usr/safenet/lunaclient"
+echo "Creating luna lib folder"
+mkdir -p $luna_libs_folder
+echo "Extracting luna libs"
+tar xvf $buildpack/lib/luna_security_provider_lib.tar -C $luna_libs_folder
 ls $buildpack
 echo "*********************************************"
 ls /lib 
