@@ -349,13 +349,13 @@ echo "Build folder: $build"
 echo "Cache folder: $cache"
 echo "*********************************************"
 
-sleep 5
-if [ -f $buildpack_bin/luna_setup.sh ];
-then
-	echo "$buildpack/bin/luna_setup.sh found"
-	cp $buildpack_bin/luna_setup.sh $buildpack
-	sh $buildpack/luna_setup.sh
-fi	
+#sleep 5
+#if [ -f $buildpack_bin/luna_setup.sh ];
+#then
+#	echo "$buildpack/bin/luna_setup.sh found"
+#	cp $buildpack_bin/luna_setup.sh $buildpack
+#	sh $buildpack/luna_setup.sh
+#fi	
 
 
 
