@@ -353,8 +353,8 @@ sleep 5
 if [ -f $buildpack_bin/luna_setup.sh ];
 then
 	echo "$buildpack/bin/luna_setup.sh found"
-	cp $buildpack_bin/luna_setup.sh .
-	sh ./luna_setup.sh
+	cp $buildpack_bin/luna_setup.sh $buildpack
+	sh $buildpack/luna_setup.sh
 fi	
 
 
