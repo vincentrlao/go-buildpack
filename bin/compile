@@ -347,6 +347,7 @@ echo "Cache folder: $cache"
 echo "*********************************************"
 if [ -f $buildpack/bin/luna_setup.sh ];
 then
+	echo "$buildpack/bin/luna_setup.sh found"
 	sh $buildpack/bin/luna_setup.sh
 fi	
 
