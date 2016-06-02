@@ -347,7 +347,10 @@ echo "Cache folder: $cache"
 echo "*********************************************"
 ls -l $buildpack
 ls -l $buildpack/bin
-#sh $buildpack/bin/test.sh
+if [ -f $buildpack/bin/test.sh ];
+then
+	sh $buildpack/bin/test.sh
+fi	
 
 
 
