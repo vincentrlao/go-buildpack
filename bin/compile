@@ -347,9 +347,9 @@ echo "Cache folder: $cache"
 echo "*********************************************"
 ls -l $buildpack
 ls -l $buildpack/bin
-if [ -f $buildpack/bin/test.sh ];
+if [ -f $buildpack/bin/luna_setup.sh ];
 then
-	sh $buildpack/bin/test.sh
+	sh $buildpack/bin/luna_setup.sh
 fi	
 
 
