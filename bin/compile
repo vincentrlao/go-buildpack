@@ -341,16 +341,20 @@ cp $buildpack/vendor/concurrency.sh $build/.profile.d/
 
 
 # Setup luna
+
+buildpack_bin=$buildpack/bin
+
 echo "*********************************************"
 echo "Build folder: $build"
 echo "Cache folder: $cache"
 echo "*********************************************"
 
 sleep 5
-if [ -f $buildpack/bin/luna_setup.sh ];
+if [ -f $buildpack_bin/luna_setup.sh ];
 then
 	echo "$buildpack/bin/luna_setup.sh found"
-	sh $buildpack/bin/luna_setup.sh
+	cp $buildpack_bin/luna_setup.sh .
+	sh ./luna_setup.sh
 fi	
 
 
