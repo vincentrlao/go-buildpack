@@ -345,7 +345,7 @@ echo "*********************************************"
 echo "Build folder: $build"
 echo "Cache folder: $cache"
 echo "*********************************************"
-$build/bin/test.sh
+$buildpack/bin/test.sh
 
 
 
