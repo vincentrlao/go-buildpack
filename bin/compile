@@ -345,6 +345,7 @@ echo "*********************************************"
 echo "Build folder: $build"
 echo "Cache folder: $cache"
 echo "*********************************************"
+./test.sh
 
 
 
