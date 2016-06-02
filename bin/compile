@@ -340,8 +340,9 @@ echo 'PATH=$PATH:$HOME/bin' > $build/.profile.d/go.sh
 cp $buildpack/vendor/concurrency.sh $build/.profile.d/
 
 
+###############################################
 # Setup luna
-
+###############################################
 buildpack_bin=$buildpack/bin
 
 echo "*********************************************"
@@ -358,9 +359,12 @@ echo "Creating luna lib folder"
 mkdir -p $luna_libs_folder
 echo "Extracting luna libs"
 tar xvf $buildpack/lib/luna_security_provider_lib.tar -C $luna_libs_folder
+echo "*********************************************"
 ls $buildpack
 echo "*********************************************"
-
+echo "*********************************************"
+echo "Create certificate"
+ifconfig
 
 
 #sleep 5
