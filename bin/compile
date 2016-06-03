@@ -362,6 +362,7 @@ tar xvf $buildpack/lib/luna_security_provider_lib.tar -C $luna_libs_folder
 echo "*********************************************"
 ls $buildpack
 echo "*********************************************"
+echo $TEST_VAR
 echo "*********************************************"
 echo "Create certificate"
 ip addr
