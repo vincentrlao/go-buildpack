@@ -337,6 +337,10 @@ then
 	echo -e "---\ndefault_process_types:\n  web: $(basename $name)" > /tmp/buildpack-release-step.yml
 else
 	echo "$(basename $name) not found."
+	echo "Let us try to rebuild..."
+	ls
+	go build
+	echo -e "---\ndefault_process_types:\n  web: $(basename $name)" > /tmp/buildpack-release-step.yml
 fi
 
 rm -rf $build/.heroku
