@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # bin/release <build-dir>
 
-#echo "$(cat /tmp/buildpack-release-step.yml)"
-echo "test"
+cat /tmp/buildpack-release-step.yml
+
+echo "$(cat /tmp/buildpack-release-step.yml)"
