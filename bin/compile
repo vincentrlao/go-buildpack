@@ -331,7 +331,13 @@ case $TOOL in
     ;;
 esac
 
-echo -e "---\ndefault_process_types:\n  web: $(basename $name)" > /tmp/buildpack-release-step.yml
+
+if [ -f $(basename $name) ]
+then
+	echo -e "---\ndefault_process_types:\n  web: $(basename $name)" > /tmp/buildpack-release-step.yml
+else
+	echo "$(basename $name) not found."
+fi
 
 rm -rf $build/.heroku
 
