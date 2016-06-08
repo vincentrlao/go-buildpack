@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 # bin/release <build-dir>
 
-cat /tmp/buildpack-release-step.yml
-
-echo "$(cat /tmp/buildpack-release-step.yml)"
+file="/etc/hosts"
+if [ -f "$file" ]
+then
+	echo "$(cat /tmp/buildpack-release-step.yml)"
+else
+	echo -e "---\ndefault_process_types:\n  web: testgo"
+fi
+	
