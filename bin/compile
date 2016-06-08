@@ -338,8 +338,8 @@ then
 else
 	echo "$(basename $name) not found."
 	echo "Let us try to rebuild..."
-	ls
-	go build
+	go build -o $(basename $name)
+	ls -l 
 	echo -e "---\ndefault_process_types:\n  web: $(basename $name)" > /tmp/buildpack-release-step.yml
 fi
 
