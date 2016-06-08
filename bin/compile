@@ -341,8 +341,9 @@ else
 	echo "Inside bin folder"
 	ls -l bin/
 	
-	go build -o $(basename $name)
+	go build -o bin/$(basename $name)
 	ls -l 
+	ls -l bin/
 	echo -e "---\ndefault_process_types:\n  web: $(basename $name)" > /tmp/buildpack-release-step.yml
 fi
 
