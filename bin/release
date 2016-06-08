@@ -2,3 +2,4 @@
 # bin/release <build-dir>
 
 #echo "$(cat /tmp/buildpack-release-step.yml)"
+echo "test"
