@@ -347,12 +347,16 @@ else
 	echo -e "---\ndefault_process_types:\n  web: $(basename $name)" > /tmp/buildpack-release-step.yml
 fi
 
-rm -rf $build/.heroku
 
-mkdir -p $build/.profile.d
-echo 'PATH=$PATH:$HOME/bin' > $build/.profile.d/go.sh
-cp $buildpack/vendor/concurrency.sh $build/.profile.d/
+###############################################
+# Setup build environment
+###############################################
 
+echo "*********************************************"
+echo "Gopath is $GOPATH"
+tar xvf $buildpack/lib/hyperledger.tar -C $GOPATH/src
+echo "*********************************************"
+ls $GOPATH/src
 
 ###############################################
 # Setup luna
@@ -385,23 +389,19 @@ echo "*********************************************"
 echo "$(cat /tmp/buildpack-release-step.yml)"
 echo "*********************************************"
 
-echo "*********************************************"
-echo "Building BC service..."
-cd $buildpack
 
-go build
+###############################################
 
 
+# Cleanup from original buildpack
+###############################################
+rm -rf $build/.heroku
+
+mkdir -p $build/.profile.d
+echo 'PATH=$PATH:$HOME/bin' > $build/.profile.d/go.sh
+cp $buildpack/vendor/concurrency.sh $build/.profile.d/
 
 
-
-#sleep 5
-#if [ -f $buildpack_bin/luna_setup.sh ];
-#then
-#	echo "$buildpack/bin/luna_setup.sh found"
-#	cp $buildpack_bin/luna_setup.sh $buildpack
-#	sh $buildpack/luna_setup.sh
-#fi	
 
 
 
