@@ -385,7 +385,11 @@ echo "*********************************************"
 echo "$(cat /tmp/buildpack-release-step.yml)"
 echo "*********************************************"
 
+echo "*********************************************"
+echo "Building BC service..."
+cd $buildpack
 
+go build
 
 
 
