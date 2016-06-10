@@ -356,7 +356,8 @@ case $TOOL in
 		#Added
 		
 		extract_deps
-		export GO15VENDOREXPERIMENT=0
+		export GO15VENDOREXPERIMENT=1
+		GO15VENDOREXPERIMENT=1
 
         pkgs="."
 
@@ -380,7 +381,6 @@ case $TOOL in
 			echo "Debug......................go_1.6"
 		
             if test "$GO15VENDOREXPERIMENT" = "0"
-				echo "Debug..........................GO15VENDOREXPERIMENT is 0"
             then
                 warn ""
                 warn "\$GO15VENDOREXPERIMENT=0. To use vendor your packages in vendor/"
