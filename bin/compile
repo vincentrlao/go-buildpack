@@ -152,6 +152,8 @@ tar -xzf /tmp/godep -C /tmp
 PATH=/tmp/bin:$PATH
 # END CF Common
 
+echo "Debug.............................@CF Common"
+
 virtualenv() {
     python "$buildpack/vendor/virtualenv-1.11.6/virtualenv.py" "$@"
 }
@@ -190,6 +192,8 @@ then
     done
 fi
 
+echo "Debug.............................0"
+
 if test -f "$build/Godeps/Godeps.json"
 then
     TOOL="godep"
@@ -223,6 +227,8 @@ else
     name=$GOPACKAGENAME
 fi
 
+echo "Debug.............................0.1"
+
 ver=$(expand_ver $buildpack $ver)
 
 file=${GOFILE:-$ver.linux-amd64.tar.gz}
@@ -237,6 +243,8 @@ then
 fi
 
 report_ver $ver
+
+echo "Debug.............................0.2"
 
 if test -d $cache/$ver/go
 then
@@ -258,6 +266,8 @@ else
     echo "Downloaded [$url]"
     cd - >/dev/null
 fi
+
+echo "Debug.............................0.3"
 
 mkdir -p $build/bin
 GOROOT=$cache/$ver/go export GOROOT
