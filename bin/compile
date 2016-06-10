@@ -43,8 +43,9 @@ extract_deps() {
 	echo "*********************************************"
 	echo "Extracting rocksdb..."
 	mkdir $buildpack/include
-	tar xf $buildpack/lib/rocksdb_header.tar -C $buildpack/include
+	#tar xf $buildpack/lib/rocksdb_header.tar -C $buildpack/include
 	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$buildpack/lib:$buildpack/include:$buildpack/include/rocksdb
+	ls $buildpack/include/rocksdb
 	echo "Library path: $LD_LIBRARY_PATH"
 	
 	###############################################
