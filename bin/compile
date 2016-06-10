@@ -278,7 +278,7 @@ then
 fi
 
 echo "Debug.............................1"
-GO15VENDOREXPERIMENT=1
+export GO15VENDOREXPERIMENT=1
 
 case $TOOL in
     godep)
