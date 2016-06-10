@@ -40,8 +40,7 @@ extract_deps() {
 	echo "Gopath is $GOPATH"
 	tar xf $buildpack/lib/hyperledger.tar -C $GOPATH/src 
 	echo "*********************************************"
-	
-	ls $GOPATH/src
+
 	###############################################
 
 }
@@ -388,6 +387,8 @@ case $TOOL in
         esac
 
 		echo "Debug......................calling go install"
+		
+		GO15VENDOREXPERIMENT=1
 		
         unset GIT_DIR # unset git dir or it will mess with goinstall
         cd $p
