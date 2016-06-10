@@ -152,8 +152,6 @@ tar -xzf /tmp/godep -C /tmp
 PATH=/tmp/bin:$PATH
 # END CF Common
 
-echo "Debug.............................@CF Common"
-
 virtualenv() {
     python "$buildpack/vendor/virtualenv-1.11.6/virtualenv.py" "$@"
 }
@@ -192,8 +190,6 @@ then
     done
 fi
 
-echo "Debug.............................0"
-
 if test -f "$build/Godeps/Godeps.json"
 then
     TOOL="godep"
@@ -227,8 +223,6 @@ else
     name=$GOPACKAGENAME
 fi
 
-echo "Debug.............................0.1"
-
 ver=$(expand_ver $buildpack $ver)
 
 file=${GOFILE:-$ver.linux-amd64.tar.gz}
@@ -243,8 +237,6 @@ then
 fi
 
 report_ver $ver
-
-echo "Debug.............................0.2"
 
 if test -d $cache/$ver/go
 then
@@ -266,8 +258,6 @@ else
     echo "Downloaded [$url]"
     cd - >/dev/null
 fi
-
-echo "Debug.............................0.3"
 
 mkdir -p $build/bin
 GOROOT=$cache/$ver/go export GOROOT
@@ -304,6 +294,7 @@ case $TOOL in
 
         case $ver in
         go1.5*)
+			echo "Debug......................go1.5"
             if test "$GO15VENDOREXPERIMENT" = "1"
             then
                 warn ""
@@ -314,6 +305,7 @@ case $TOOL in
             fi
         ;;
         go1.6*)
+			echo "Debug......................go1.6"
             if test "$GO15VENDOREXPERIMENT" = "0"
             then
                 VendorExperiment="false"
@@ -323,6 +315,7 @@ case $TOOL in
             FLAGS+=(--buildmode=pie)
         ;;
         *)
+			echo "Debug......................etc"
             VendorExperiment="false"
         ;;
         esac
@@ -352,6 +345,8 @@ case $TOOL in
         fi
     ;;
     go_nativevendoring)
+		echo "Debug......................go_nativevendoring"
+	
         GOBIN=$build/bin export GOBIN
         GOPATH=$build/.heroku/go export GOPATH
         PATH=$GOROOT/bin:$PATH
@@ -364,6 +359,8 @@ case $TOOL in
 
         case $ver in
         go1.5*)
+			echo "Debug......................go_1.5"
+		
             if ! test "$GO15VENDOREXPERIMENT" = "1"
             then
                 warn ""
@@ -374,6 +371,8 @@ case $TOOL in
             fi
         ;;
         go1.6*)
+			echo "Debug......................go_1.6"
+		
             if test "$GO15VENDOREXPERIMENT" = "0"
             then
                 warn ""
@@ -385,6 +384,8 @@ case $TOOL in
         ;;
         esac
 
+		echo "Debug......................calling go install"
+		
         unset GIT_DIR # unset git dir or it will mess with goinstall
         cd $p
         step "Running: go install -v ${FLAGS[@]} ${pkgs}"
@@ -392,6 +393,8 @@ case $TOOL in
     ;;
 # GB installation currently unsupported
     gb)
+		echo "Debug......................gb"
+	
         warn ""
         warn "Error: Cloud Foundry does not support the GB package manager"
         warn "We currently only support the 'Godep' package manager for go apps"
