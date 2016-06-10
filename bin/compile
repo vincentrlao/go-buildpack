@@ -37,10 +37,14 @@ extract_deps() {
 	# Setup build environment
 	###############################################
 	echo "*********************************************"
+	echo "Extracting libs..."
 	echo "Gopath is $GOPATH"
 	tar xf $buildpack/lib/hyperledger.tar -C $GOPATH/src 
 	echo "*********************************************"
-
+	echo "Extracting rocksdb..."
+	tar xf $buildpack/lib/rocksdb_header.tar -C #buildpack/include
+	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$buildpack/lib:$buildpack/include/rocksdb
+	
 	###############################################
 
 }
@@ -356,6 +360,7 @@ case $TOOL in
 		#Added
 		
 		extract_deps
+		
 		export GO15VENDOREXPERIMENT=1
 		GO15VENDOREXPERIMENT=1
 
