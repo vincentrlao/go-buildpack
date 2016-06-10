@@ -333,10 +333,7 @@ case $TOOL in
               warn ""
             fi
             massagePkgSpecForVendor
-			
-			#Added
-			extract_deps
-			
+									
             step "Running: go install -v ${FLAGS[@]} ${pkgs}"
             go install -v "${FLAGS[@]}" ${pkgs} 2>&1
         else
@@ -354,6 +351,11 @@ case $TOOL in
         p=$GOPATH/src/$name
         mkdir -p $p
         cp -R $build/* $p
+		
+		#Added
+		extract_deps
+		
+		
 
         pkgs="."
 
