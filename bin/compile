@@ -43,6 +43,7 @@ extract_deps() {
 	echo "*********************************************"
 	echo "Extracting rocksdb..."
 	mkdir $buildpack/include
+	ls $buildpack
 	tar xf $buildpack/lib/rocksdb_header.tar -C $buildpack/include
 		
 	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$buildpack/lib:$buildpack/include:$buildpack/include/rocksdb
@@ -50,8 +51,8 @@ extract_deps() {
 	export CGO_CFLAGS=$buildpack/include
 	
 	echo "Copying header"
-	cp -n $buildpack/include/rocksdb/c.h $buildpack/lib
-	cp -n $buildpack/include/rocksdb/c.h $buildpack/include
+	cp -n $buildpack/include/rocksdb/c.h $buildpack/lib/
+	cp -n $buildpack/include/rocksdb/c.h $buildpack/include/
 	#cp -n $buildpack/include/rocksdb/c.h .
 	
 	ls $buildpack
