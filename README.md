@@ -5,6 +5,8 @@ A Cloud Foundry [buildpack](http://docs.cloudfoundry.org/buildpacks/) for Go(lan
 
 This is based on the [Heroku buildpack] (https://github.com/heroku/heroku-buildpack-go).
 
+Note that this buildpack is currently 
+
 ## Using the Buildpack
 
 For information on deploying Go applications visit [CloudFoundry.org](http://docs.cloudfoundry.org/buildpacks/go/index.html).

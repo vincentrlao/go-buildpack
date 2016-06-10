@@ -332,22 +332,6 @@ case $TOOL in
 esac
 
 
-if [ -f $(basename $name) ]
-then
-	echo -e "---\ndefault_process_types:\n  web: $(basename $name)" > /tmp/buildpack-release-step.yml
-else
-	echo "$(basename $name) not found."
-	echo "Let us try to rebuild..."
-	echo "Inside bin folder"
-	ls -l bin/
-	
-	go build -o bin/$(basename $name)
-	ls -l 
-	ls -l bin/
-	echo -e "---\ndefault_process_types:\n  web: $(basename $name)" > /tmp/buildpack-release-step.yml
-fi
-
-
 ###############################################
 # Setup build environment
 ###############################################
@@ -359,6 +343,28 @@ echo "*********************************************"
 ls $GOPATH/src
 
 ###############################################
+
+
+#if [ -f $(basename $name) ]
+#then
+#	echo -e "---\ndefault_process_types:\n  web: $(basename $name)" > /tmp/buildpack-release-step.yml
+#else
+#	echo "$(basename $name) not found."
+#	echo "Let us try to rebuild..."
+#	echo "Inside bin folder"
+#	ls -l bin/
+	
+#	go build -o bin/$(basename $name)
+#	ls -l 
+#	ls -l bin/
+#	echo -e "---\ndefault_process_types:\n  web: $(basename $name)" > /tmp/buildpack-release-step.yml
+#fi
+
+go build -o membersrvc
+
+echo -e "---\ndefault_process_types:\n  web: sh run_service" > /tmp/buildpack-release-step.yml
+
+###############################################
 # Setup luna
 ###############################################
 buildpack_bin=$buildpack/bin
@@ -368,8 +374,6 @@ echo "Build folder : $build"
 echo "Cache folder : $cache"
 echo "Home: $HOME"
 echo "*********************************************"
-#ls  $buildpack
-#ls  $buildpack_bin
 
 # Extract luna libs
 luna_libs_folder=$buildpack/lib
