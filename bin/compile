@@ -52,7 +52,7 @@ extract_deps() {
 	#cp -n $buildpack/include/rocksdb/c.h $buildpack/include
 	#cp -n $buildpack/include/rocksdb/c.h .
 	
-	ls
+	ls -l app
 	pwd
 	
 	
