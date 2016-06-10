@@ -369,6 +369,9 @@ case $TOOL in
                 warn "\$GO15VENDOREXPERIMENT is not =1. To use vendor your packages in vendor/"
                 warn "for go 1.5 this environment variable must be set to 1."
                 warn ""
+				
+				echo "Debug...................exit"
+				
                 exit 1
             fi
         ;;
@@ -376,11 +379,13 @@ case $TOOL in
 			echo "Debug......................go_1.6"
 		
             if test "$GO15VENDOREXPERIMENT" = "0"
+				echo "Debug..........................GO15VENDOREXPERIMENT is 0"
             then
                 warn ""
                 warn "\$GO15VENDOREXPERIMENT=0. To use vendor your packages in vendor/"
                 warn "for go 1.6 this environment variable must unset or set to 1."
                 warn ""
+				echo "Debug...................exit"
                 exit 1
             fi
         ;;
@@ -388,11 +393,10 @@ case $TOOL in
 
 		echo "Debug......................calling go install"
 		
-		GO15VENDOREXPERIMENT=1
-		
         unset GIT_DIR # unset git dir or it will mess with goinstall
         cd $p
         step "Running: go install -v ${FLAGS[@]} ${pkgs}"
+		pwd
         go install -v "${FLAGS[@]}" ${pkgs} 2>&1
     ;;
 # GB installation currently unsupported
