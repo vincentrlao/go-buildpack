@@ -29,6 +29,58 @@ massagePkgSpecForVendor() {
     pkgs="${t}"
 }
 
+
+
+extract_deps() {
+	
+	###############################################
+	# Setup build environment
+	###############################################
+	echo "*********************************************"
+	echo "Gopath is $GOPATH"
+	tar xvf $buildpack/lib/hyperledger.tar -C $GOPATH/src
+	echo "*********************************************"
+	ls $GOPATH/src
+	###############################################
+
+}
+
+setup_luna() {
+	###############################################
+	# Setup luna
+	###############################################
+	
+	
+	
+	buildpack_bin=$buildpack/bin
+
+	echo "*********************************************"
+	echo "Setup Luna"
+	echo "Build folder : $build"
+	echo "Cache folder : $cache"
+	echo "Home: $HOME"
+	echo "*********************************************"
+
+	# Extract luna libs
+	luna_libs_folder=$buildpack/lib
+	echo "Creating luna lib folder"
+	mkdir -p $luna_libs_folder
+	echo "Extracting luna libs"
+	tar xvf $buildpack/lib/luna_security_provider_lib.tar -C $luna_libs_folder
+	echo "*********************************************"
+	echo $TEST_VAR
+	echo "*********************************************"
+	echo "Create certificate here..."
+
+	echo "*********************************************"
+	echo Check IP
+	ip addr
+	echo "*********************************************"
+	echo "$(cat /tmp/buildpack-release-step.yml)"
+	echo "*********************************************"
+
+}
+
 # Go releases have moved to a new URL scheme
 # starting with Go version 1.2.2. Return the old
 # location for known old versions and the new
@@ -274,6 +326,10 @@ case $TOOL in
               warn ""
             fi
             massagePkgSpecForVendor
+			
+			#Added
+			extract_deps
+			
             step "Running: go install -v ${FLAGS[@]} ${pkgs}"
             go install -v "${FLAGS[@]}" ${pkgs} 2>&1
         else
@@ -332,17 +388,6 @@ case $TOOL in
 esac
 
 
-###############################################
-# Setup build environment
-###############################################
-
-echo "*********************************************"
-echo "Gopath is $GOPATH"
-tar xvf $buildpack/lib/hyperledger.tar -C $GOPATH/src
-echo "*********************************************"
-ls $GOPATH/src
-
-###############################################
 
 
 #if [ -f $(basename $name) ]
@@ -360,38 +405,11 @@ ls $GOPATH/src
 #	echo -e "---\ndefault_process_types:\n  web: $(basename $name)" > /tmp/buildpack-release-step.yml
 #fi
 
-go build -o membersrvc
 
 echo -e "---\ndefault_process_types:\n  web: sh run_service" > /tmp/buildpack-release-step.yml
 
-###############################################
-# Setup luna
-###############################################
-buildpack_bin=$buildpack/bin
-
-echo "*********************************************"
-echo "Build folder : $build"
-echo "Cache folder : $cache"
-echo "Home: $HOME"
-echo "*********************************************"
-
-# Extract luna libs
-luna_libs_folder=$buildpack/lib
-echo "Creating luna lib folder"
-mkdir -p $luna_libs_folder
-echo "Extracting luna libs"
-tar xvf $buildpack/lib/luna_security_provider_lib.tar -C $luna_libs_folder
-echo "*********************************************"
-echo $TEST_VAR
-echo "*********************************************"
-echo "Create certificate here..."
-
-echo "*********************************************"
-echo Check IP
-ip addr
-echo "*********************************************"
-echo "$(cat /tmp/buildpack-release-step.yml)"
-echo "*********************************************"
+#added
+setup_luna
 
 
 ###############################################
