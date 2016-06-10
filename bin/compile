@@ -278,6 +278,7 @@ then
 fi
 
 echo "Debug.............................1"
+GO15VENDOREXPERIMENT=1
 
 case $TOOL in
     godep)
@@ -353,10 +354,8 @@ case $TOOL in
         cp -R $build/* $p
 		
 		#Added
-		GO15VENDOREXPERIMENT=1
+		
 		extract_deps
-		
-		
 
         pkgs="."
 
