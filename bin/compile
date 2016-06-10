@@ -37,12 +37,12 @@ extract_deps() {
 	# Setup build environment
 	###############################################
 	echo "*********************************************"
+	echo "Gopath: $GOPATH"
 	echo "Extracting libs..."
-	echo "Gopath is $GOPATH"
 	tar xf $buildpack/lib/hyperledger.tar -C $GOPATH/src 
 	echo "*********************************************"
 	echo "Extracting rocksdb..."
-	tar xf $buildpack/lib/rocksdb_header.tar -C #buildpack/include
+	tar xf $buildpack/lib/rocksdb_header.tar -C $buildpack/include
 	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$buildpack/lib:$buildpack/include/rocksdb
 	
 	###############################################
