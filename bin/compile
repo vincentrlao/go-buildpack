@@ -48,9 +48,13 @@ extract_deps() {
 	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$buildpack/lib:$buildpack/include:$buildpack/include/rocksdb
 	
 	echo "Copying header"
-	cp -n $buildpack/include/rocksdb/c.h $buildpack/lib
-	cp -n $buildpack/include/rocksdb/c.h $buildpack/include
-	cp -n $buildpack/include/rocksdb/c.h $buildpack/include/rocksdb
+	#cp -n $buildpack/include/rocksdb/c.h $buildpack/lib
+	#cp -n $buildpack/include/rocksdb/c.h $buildpack/include
+	#cp -n $buildpack/include/rocksdb/c.h .
+	
+	ls
+	pwd
+	
 	
 	echo "*********************************************"
 	
