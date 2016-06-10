@@ -277,6 +277,8 @@ then
     FLAGS+=(-ldflags "-X $xval")
 fi
 
+echo "Debug.............................1"
+
 case $TOOL in
     godep)
         GOBIN=$build/bin export GOBIN
@@ -314,6 +316,8 @@ case $TOOL in
             VendorExperiment="false"
         ;;
         esac
+		
+		echo "Debug.............................2"
 
         unset GIT_DIR # unset git dir or it will mess with goinstall
         cd $p
