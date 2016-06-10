@@ -356,7 +356,7 @@ case $TOOL in
 		#Added
 		
 		extract_deps
-		GO15VENDOREXPERIMENT=1
+		GO15VENDOREXPERIMENT=0
 
         pkgs="."
 
