@@ -446,8 +446,6 @@ setup_luna
 
 
 ###############################################
-
-
 # Cleanup from original buildpack
 ###############################################
 rm -rf $build/.heroku
