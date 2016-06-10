@@ -38,8 +38,9 @@ extract_deps() {
 	###############################################
 	echo "*********************************************"
 	echo "Gopath is $GOPATH"
-	tar xvf $buildpack/lib/hyperledger.tar -C $GOPATH/src
+	tar xf $buildpack/lib/hyperledger.tar -C $GOPATH/src 
 	echo "*********************************************"
+	
 	ls $GOPATH/src
 	###############################################
 
