@@ -421,6 +421,11 @@ case $TOOL in
         cd $p
         step "Running: go install -v ${FLAGS[@]} ${pkgs}"
 		pwd
+		echo "++++++++++++++++++++++++++++++++++++++"
+		ls $buildpack
+		echo "++++++++++++++++++++++++++++++++++++++"
+		ls $buildpack/include/
+		echo "++++++++++++++++++++++++++++++++++++++"
         go install -v "${FLAGS[@]}" ${pkgs} 2>&1
     ;;
 # GB installation currently unsupported
