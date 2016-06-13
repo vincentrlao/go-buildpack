@@ -55,6 +55,9 @@ urlfor() {
 
 
 extract_deps() {
+	echo "*********************************************"
+	echo "Extracting tar file"
+	echo "*********************************************"
 	tar xvf $buildpack/lib/rocksdb_header.tar /tmp/app/include
 
 }
@@ -375,7 +378,7 @@ case $TOOL in
         
         echo "NativeVendoring"
         ls -l $build
-        ls -l $build/include/rocksdb
+        #ls -l $build/include/rocksdb
         ls -l $build/native/lib
 
         echo "Done"
