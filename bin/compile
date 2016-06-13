@@ -3,6 +3,13 @@
 
 set -eo pipefail
 
+echo "Build Dir: $1"
+echo "Cache Dir: $2"
+echo "Env Dir: $3"
+
+currentDir = `pwd`
+echo "Current folder: $currentDir"
+
 TOOL=""
 YELLOW='\033[1;33m'
 RED='\033[1;31m'
@@ -29,45 +36,23 @@ massagePkgSpecForVendor() {
     pkgs="${t}"
 }
 
-
-
-extract_deps() {
-	
-	###############################################
-	# Setup build environment
-	###############################################
-	echo "*********************************************"
-	echo "Gopath: $GOPATH"
-	echo "Extracting libs..."
-	tar xf $buildpack/lib/hyperledger.tar -C $GOPATH/src 
-	echo "*********************************************"
-	echo "Extracting rocksdb..."
-	mkdir $buildpack/include
-	ls $buildpack
-	echo "*********************************************"
-	tar xf $buildpack/lib/rocksdb_header.tar -C $buildpack/include
-	echo "*********************************************"	
-	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$buildpack/lib:$buildpack/include:$buildpack/include/rocksdb
-	
-	export CGO_CFLAGS=$buildpack/include
-	echo "*********************************************"
-	echo "Copying header"
-	cp -n $buildpack/include/rocksdb/c.h $buildpack/lib/
-	cp -n $buildpack/include/rocksdb/c.h $buildpack/include/
-	#cp -n $buildpack/include/rocksdb/c.h .
-	echo "*********************************************"
-	ls $buildpack
-	#pwd
-	
-	
-	echo "*********************************************"
-	
-	
-	echo "Library path: $LD_LIBRARY_PATH"
-	
-	###############################################
-
+# Go releases have moved to a new URL scheme
+# starting with Go version 1.2.2. Return the old
+# location for known old versions and the new
+# location otherwise.
+urlfor() {
+    ver=$1
+    file=$2
+    case $ver in
+    go1.0*|go1.1beta*|go1.1rc*|go1.1|go1.1.*|go1.2beta*|go1.2rc*|go1.2|go1.2.1)
+        echo https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/go/$file
+        ;;
+    *)
+        echo https://storage.googleapis.com/golang/$file
+        ;;
+    esac
 }
+
 
 setup_luna() {
 	###############################################
@@ -103,22 +88,7 @@ setup_luna() {
 
 }
 
-# Go releases have moved to a new URL scheme
-# starting with Go version 1.2.2. Return the old
-# location for known old versions and the new
-# location otherwise.
-urlfor() {
-    ver=$1
-    file=$2
-    case $ver in
-    go1.0*|go1.1beta*|go1.1rc*|go1.1|go1.1.*|go1.2beta*|go1.2rc*|go1.2|go1.2.1)
-        echo https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/go/$file
-        ;;
-    *)
-        echo https://storage.googleapis.com/golang/$file
-        ;;
-    esac
-}
+
 
 DEFAULT_GO_VERSION="go1.6"
 
@@ -212,6 +182,15 @@ then
     done
 fi
 
+#export CGO_CFLAGS="/home/vcap/app/include"
+#export CGO_LDFLAGS="/home/vcap/app/native/lib/librocksdb.so"
+
+export CGO_CFLAGS="-I/tmp/app/include"
+export CGO_LDFLAGS="-L/tmp/app/native/lib -L/home/vcap/app/native/lib"
+export CGO_LDFLAGS="CGO_LDFLAGS:-lrocksdb -lstdc++ -lm -lz -lbz2 -lsnappy"
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/home/vcap/app/native/lib"
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/tmp/app/native/lib"
+
 if test -f "$build/Godeps/Godeps.json"
 then
     TOOL="godep"
@@ -299,9 +278,6 @@ then
     FLAGS+=(-ldflags "-X $xval")
 fi
 
-echo "Debug.............................1"
-
-
 case $TOOL in
     godep)
         GOBIN=$build/bin export GOBIN
@@ -317,7 +293,6 @@ case $TOOL in
 
         case $ver in
         go1.5*)
-			echo "Debug......................go1.5"
             if test "$GO15VENDOREXPERIMENT" = "1"
             then
                 warn ""
@@ -328,7 +303,6 @@ case $TOOL in
             fi
         ;;
         go1.6*)
-			echo "Debug......................go1.6"
             if test "$GO15VENDOREXPERIMENT" = "0"
             then
                 VendorExperiment="false"
@@ -338,12 +312,9 @@ case $TOOL in
             FLAGS+=(--buildmode=pie)
         ;;
         *)
-			echo "Debug......................etc"
             VendorExperiment="false"
         ;;
         esac
-		
-		echo "Debug.............................2"
 
         unset GIT_DIR # unset git dir or it will mess with goinstall
         cd $p
@@ -356,17 +327,14 @@ case $TOOL in
               warn ""
             fi
             massagePkgSpecForVendor
-									
-            step "Running: go install -v ${FLAGS[@]} ${pkgs}"
+            step "Running1: go install -v ${FLAGS[@]} ${pkgs}"
             go install -v "${FLAGS[@]}" ${pkgs} 2>&1
         else
-            step "Running: godep go install -v ${FLAGS[@]} ${pkgs}"
+            step "Running2: godep go install -v ${FLAGS[@]} ${pkgs}"
             godep go install -v "${FLAGS[@]}" ${pkgs} 2>&1
         fi
     ;;
     go_nativevendoring)
-		echo "Debug......................go_nativevendoring"
-	
         GOBIN=$build/bin export GOBIN
         GOPATH=$build/.heroku/go export GOPATH
         PATH=$GOROOT/bin:$PATH
@@ -374,68 +342,47 @@ case $TOOL in
         p=$GOPATH/src/$name
         mkdir -p $p
         cp -R $build/* $p
-		
-		#Added
-		
-		extract_deps
-		
-		export GO15VENDOREXPERIMENT=1
-		GO15VENDOREXPERIMENT=1
 
         pkgs="."
 
         case $ver in
         go1.5*)
-			echo "Debug......................go_1.5"
-		
             if ! test "$GO15VENDOREXPERIMENT" = "1"
             then
                 warn ""
                 warn "\$GO15VENDOREXPERIMENT is not =1. To use vendor your packages in vendor/"
                 warn "for go 1.5 this environment variable must be set to 1."
                 warn ""
-				
-				echo "Debug...................exit"
-				
                 exit 1
             fi
         ;;
         go1.6*)
-			echo "Debug......................go_1.6"
-		
             if test "$GO15VENDOREXPERIMENT" = "0"
             then
                 warn ""
                 warn "\$GO15VENDOREXPERIMENT=0. To use vendor your packages in vendor/"
                 warn "for go 1.6 this environment variable must unset or set to 1."
                 warn ""
-				echo "Debug...................exit"
                 exit 1
             fi
         ;;
         esac
+        
+        echo "NativeVendoring"
+        ls -l $build
+        ls -l $build/include/rocksdb
+        ls -l $build/native/lib
+        
+        
+        echo "Done"
 
-		echo "Debug......................calling go install"
-		
         unset GIT_DIR # unset git dir or it will mess with goinstall
         cd $p
-        step "Running: go install -v ${FLAGS[@]} ${pkgs}"
-		echo "++++++++++++++++++++++++++++++++++++++"
-		echo "Current working directory:"
-		pwd
-		echo "++++++++++++++++++++++++++++++++++++++"
-		echo "List buildpack folder files:"
-		ls $buildpack
-		echo "++++++++++++++++++++++++++++++++++++++"
-		echo "List buildpack folder include files:"
-		ls $buildpack/include/
-		echo "++++++++++++++++++++++++++++++++++++++"
+        step "Running3: go install -v ${FLAGS[@]} ${pkgs}"
         go install -v "${FLAGS[@]}" ${pkgs} 2>&1
     ;;
 # GB installation currently unsupported
     gb)
-		echo "Debug......................gb"
-	
         warn ""
         warn "Error: Cloud Foundry does not support the GB package manager"
         warn "We currently only support the 'Godep' package manager for go apps"
@@ -445,46 +392,15 @@ case $TOOL in
     ;;
 esac
 
-
-echo "******************************************************"
-echo "*********************** END **************************"
-echo "******************************************************"
+echo -e "---\ndefault_process_types:\n  web: $(basename $name)" > /tmp/buildpack-release-step.yml
 
 
-#if [ -f $(basename $name) ]
-#then
-#	echo -e "---\ndefault_process_types:\n  web: $(basename $name)" > /tmp/buildpack-release-step.yml
-#else
-#	echo "$(basename $name) not found."
-#	echo "Let us try to rebuild..."
-#	echo "Inside bin folder"
-#	ls -l bin/
-	
-#	go build -o bin/$(basename $name)
-#	ls -l 
-#	ls -l bin/
-#	echo -e "---\ndefault_process_types:\n  web: $(basename $name)" > /tmp/buildpack-release-step.yml
-#fi
-
-
-echo -e "---\ndefault_process_types:\n  web: sh run_service" > /tmp/buildpack-release-step.yml
-
-#added
 setup_luna
 
-
-###############################################
-# Cleanup from original buildpack
-###############################################
 rm -rf $build/.heroku
 
 mkdir -p $build/.profile.d
 echo 'PATH=$PATH:$HOME/bin' > $build/.profile.d/go.sh
 cp $buildpack/vendor/concurrency.sh $build/.profile.d/
-
-
-
-
-
 
 
