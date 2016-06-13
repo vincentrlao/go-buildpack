@@ -58,7 +58,8 @@ extract_deps() {
 	echo "*********************************************"
 	echo "Extracting tar file"
 	echo "*********************************************"
-	tar xvf $buildpack/lib/rocksdb_header.tar /tmp/app/include
+	mkdir -p $buildpack/include
+	tar xvf $buildpack/lib/rocksdb_header.tar $buildpack/include
 
 }
 
