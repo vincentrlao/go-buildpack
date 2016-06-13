@@ -202,6 +202,9 @@ export CGO_LDFLAGS="-L/tmp/app/native/lib -L/home/vcap/app/native/lib"
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/home/vcap/app/native/lib"
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/tmp/app/native/lib"
 
+export LIBRARY_PATH="$LIBRARY_PATH:/home/vcap/app/native/lib"
+export LIBRARY_PATH="$LIBRARY_PATH:/tmp/app/native/lib"
+
 if test -f "$build/Godeps/Godeps.json"
 then
     TOOL="godep"
