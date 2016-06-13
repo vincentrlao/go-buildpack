@@ -7,8 +7,8 @@ echo "Build Dir: $1"
 echo "Cache Dir: $2"
 echo "Env Dir: $3"
 
-currentDir = `pwd`
-echo "Current folder: $currentDir"
+currentDir=`pwd`
+echo "Current folder: ${currentDir}"
 
 TOOL=""
 YELLOW='\033[1;33m'
