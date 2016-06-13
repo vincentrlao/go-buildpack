@@ -415,11 +415,13 @@ case $TOOL in
     ;;
 esac
 
-
-echo "Script to run: $(basename $name)"
-
-echo -e "---\ndefault_process_types:\n  web: $(basename $name)" >> /tmp/buildpack-release-step.yml
-
+if [ -f $name ]
+then
+	echo "Script to run: $(basename $name)"
+	echo -e "---\ndefault_process_types:\n  web: $(basename $name)" >> /tmp/buildpack-release-step.yml
+else
+	echo "Release executable not found."
+fi
 
 setup_luna
 
