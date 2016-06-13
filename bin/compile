@@ -58,9 +58,9 @@ extract_deps() {
 	echo "*********************************************"
 	echo "Extracting tar file"
 	echo "*********************************************"
-	mkdir -p $buildpack/include
-	tar xvf $buildpack/lib/rocksdb_header.tar -C $buildpack/include
-
+	mkdir -p $build/include
+	tar xvf $buildpack/lib/rocksdb_header.tar -C $build/include
+	ls $build/include
 }
 
 setup_luna() {
