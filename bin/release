@@ -2,6 +2,7 @@
 # bin/release <build-dir>
 
 
-echo "$(cat /tmp/buildpack-release-step.yml)"
+#echo "$(cat /tmp/buildpack-release-step.yml)"
 
+echo "---\ndefault_process_types:\n  web: ./peer --peer"
 
