@@ -60,10 +60,8 @@ extract_deps() {
 	echo "*********************************************"
 	mkdir -p $build/include
 	tar xvf $buildpack/lib/rocksdb.tar -C $build/include
-	mkdir -p $buildpack/include
-	tar xvf $buildpack/lib/rocksdb.tar -C $buildpack/include
 	mkdir -p $build/lib
-	cp $buildpack/include/*.so $build/lib
+	mv $build/include/*.so $build/lib
 	ls $build/include
 }
 
