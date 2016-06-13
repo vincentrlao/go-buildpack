@@ -379,7 +379,7 @@ case $TOOL in
         echo "NativeVendoring"
         ls -l $build
         #ls -l $build/include/rocksdb
-        ls -l $build/native/lib
+        #ls -l $build/native/lib
 
         echo "Done"
 
