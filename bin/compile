@@ -380,6 +380,8 @@ case $TOOL in
         ls -l $build
         #ls -l $build/include/rocksdb
         #ls -l $build/native/lib
+		
+		extract_deps
 
         echo "Done"
 
@@ -401,7 +403,7 @@ esac
 
 echo -e "---\ndefault_process_types:\n  web: $(basename $name)" > /tmp/buildpack-release-step.yml
 
-extract_deps
+
 setup_luna
 
 rm -rf $build/.heroku
