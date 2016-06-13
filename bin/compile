@@ -61,7 +61,9 @@ extract_deps() {
 	mkdir -p $build/include
 	tar xvf $buildpack/lib/rocksdb_header.tar -C $build/include
 	mkdir -p $buildpack/include
-	tar xvf $buildpack/lib/rocksdb_header.tar -C $buildpack/include
+	tar xvf $buildpack/lib/rocksdb.tar -C $buildpack/include
+	mkdir -p $build/lib
+	cp $buildpack/include/*.so $build/lib
 	ls $build/include
 }
 
