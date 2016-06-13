@@ -1,0 +1,58 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   'http-server' ]
+2 info using npm@2.11.3
+3 info using node@v0.12.7
+4 verbose install initial load of /opt/gopath/src/github.com/hyperledger/fabric/core/rest/package.json
+5 verbose readDependencies loading dependencies from /opt/gopath/src/github.com/hyperledger/fabric/core/rest/package.json
+6 silly cache add args [ 'http-server', null ]
+7 verbose cache add spec http-server
+8 silly cache add parsed spec { raw: 'http-server',
+8 silly cache add   scope: null,
+8 silly cache add   name: 'http-server',
+8 silly cache add   rawSpec: '',
+8 silly cache add   spec: '*',
+8 silly cache add   type: 'range' }
+9 silly addNamed http-server@*
+10 verbose addNamed "*" is a valid semver range for http-server
+11 silly addNameRange { name: 'http-server', range: '*', hasData: false }
+12 silly mapToRegistry name http-server
+13 silly mapToRegistry using default registry
+14 silly mapToRegistry registry https://registry.npmjs.org/
+15 silly mapToRegistry uri https://registry.npmjs.org/http-server
+16 verbose addNameRange registry:https://registry.npmjs.org/http-server not in flight; fetching
+17 verbose request uri https://registry.npmjs.org/http-server
+18 verbose request no auth needed
+19 info attempt registry request try #1 at 6:23:47 AM
+20 verbose request id 6203a6fd4747be0c
+21 http request GET https://registry.npmjs.org/http-server
+22 info retry will retry, error on last attempt: Error: tunneling socket could not be established, cause=socket hang up
+23 info attempt registry request try #2 at 6:24:40 AM
+24 http request GET https://registry.npmjs.org/http-server
+25 info retry will retry, error on last attempt: Error: tunneling socket could not be established, cause=socket hang up
+26 info attempt registry request try #3 at 6:26:23 AM
+27 http request GET https://registry.npmjs.org/http-server
+28 verbose stack Error: tunneling socket could not be established, cause=socket hang up
+28 verbose stack     at ClientRequest.onError (/usr/local/lib/node_modules/npm/node_modules/request/node_modules/tunnel-agent/index.js:168:17)
+28 verbose stack     at ClientRequest.g (events.js:199:16)
+28 verbose stack     at ClientRequest.emit (events.js:107:17)
+28 verbose stack     at TLSSocket.socketOnEnd (_http_client.js:300:9)
+28 verbose stack     at TLSSocket.emit (events.js:129:20)
+28 verbose stack     at _stream_readable.js:908:16
+28 verbose stack     at process._tickCallback (node.js:355:11)
+29 verbose cwd /opt/gopath/src/github.com/hyperledger/fabric/core/rest
+30 error Linux 3.13.0-85-generic
+31 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "install" "http-server"
+32 error node v0.12.7
+33 error npm  v2.11.3
+34 error code ECONNRESET
+35 error network tunneling socket could not be established, cause=socket hang up
+35 error network This is most likely not a problem with npm itself
+35 error network and is related to network connectivity.
+35 error network In most cases you are behind a proxy or have bad network settings.
+35 error network
+35 error network If you are behind a proxy, please make sure that the
+35 error network 'proxy' config is set properly.  See: 'npm help config'
+36 verbose exit [ 1, true ]
