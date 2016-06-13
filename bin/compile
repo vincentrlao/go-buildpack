@@ -54,6 +54,11 @@ urlfor() {
 }
 
 
+extract_deps() {
+	tar xvf $buildpack/lib/rocksdb_header.tar /tmp/app/include
+
+}
+
 setup_luna() {
 	###############################################
 	# Setup luna
@@ -372,8 +377,7 @@ case $TOOL in
         ls -l $build
         ls -l $build/include/rocksdb
         ls -l $build/native/lib
-        
-        
+
         echo "Done"
 
         unset GIT_DIR # unset git dir or it will mess with goinstall
@@ -394,7 +398,7 @@ esac
 
 echo -e "---\ndefault_process_types:\n  web: $(basename $name)" > /tmp/buildpack-release-step.yml
 
-
+extract_deps
 setup_luna
 
 rm -rf $build/.heroku
