@@ -60,9 +60,16 @@ extract_deps() {
 	echo "*********************************************"
 	mkdir -p $build/include
 	tar xvf $buildpack/lib/rocksdb.tar -C $build/include
+	echo "*********************************************"
+	echo "Copy libs"
+	echo "*********************************************"
+	ls $build/include/*.so
 	mkdir -p $build/lib
 	mv $build/include/*.so $build/lib
-	ls $build/include
+	echo "*********************************************"
+	echo "Check libs"
+	echo "*********************************************"
+	ls $build/lib
 }
 
 setup_luna() {
