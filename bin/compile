@@ -418,7 +418,7 @@ esac
 
 #echo -e "---\ndefault_process_types:\n  web: $(basename $name)" >> /tmp/buildpack-release-step.yml
 
-echo -e "---\ndefault_process_types:\n  web: ./fabric" >> /tmp/buildpack-release-step.yml
+echo -e "---\ndefault_process_types:\n  web: sh ./fabric" >> /tmp/buildpack-release-step.yml
 
 setup_luna
 
