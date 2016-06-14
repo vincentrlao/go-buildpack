@@ -4,5 +4,5 @@
 
 #echo "$(cat /tmp/buildpack-release-step.yml)"
 
-echo "---\ndefault_process_types:\n  web: ./membersrvc"
+echo "---\ndefault_process_types:\n  web: membersrvc"
 
