@@ -403,7 +403,9 @@ case $TOOL in
         unset GIT_DIR # unset git dir or it will mess with goinstall
         cd $p
         step "Running3: go install -v ${FLAGS[@]} ${pkgs}"
-        go install -v "${FLAGS[@]}" ${pkgs} 2>&1
+		echo "*****************************************"
+        #go install -v "${FLAGS[@]}" ${pkgs} 2>&1
+		go build -o outputfile
 		echo "*****************************************"
 		ls -l $build
     ;;
