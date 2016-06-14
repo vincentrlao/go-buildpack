@@ -404,6 +404,8 @@ case $TOOL in
         cd $p
         step "Running3: go install -v ${FLAGS[@]} ${pkgs}"
         go install -v "${FLAGS[@]}" ${pkgs} 2>&1
+		echo "*****************************************"
+		ls -l $build
     ;;
 # GB installation currently unsupported
     gb)
@@ -417,7 +419,7 @@ case $TOOL in
 esac
 
 #echo -e "---\ndefault_process_types:\n  web: $(basename $name)" >> /tmp/buildpack-release-step.yml
-
+cat 
 echo -e "---\ndefault_process_types:\n  web: sh $build/fabric" >> /tmp/buildpack-release-step.yml
 
 setup_luna
