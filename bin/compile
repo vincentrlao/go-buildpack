@@ -93,7 +93,7 @@ setup_luna() {
 	echo "Creating luna lib folder"
 	mkdir -p $luna_libs_folder
 	echo "Extracting luna libs"
-	tar xvf $buildpack/lib/luna_security_provider_lib.tar -C $luna_libs_folder
+	tar xvf $buildpack/lib/lunaclient-min-6.2.0.tar -C $luna_libs_folder
 	echo "*********************************************"
 	#echo $TEST_VAR
 	echo "*********************************************"
