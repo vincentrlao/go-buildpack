@@ -74,39 +74,27 @@ extract_deps() {
 	ls $build/lib
 }
 
+
 setup_luna() {
-	###############################################
-	# Setup luna
-	###############################################
-	
+
 	buildpack_bin=$buildpack/bin
-
-	echo "*********************************************"
-	echo "Setup Luna"
-	echo "Build folder : $build"
-	echo "Cache folder : $cache"
-	echo "Home: $HOME"
-	echo "*********************************************"
-
-	# Extract luna libs
 	luna_libs_folder=$buildpack/lib
-	echo "Creating luna lib folder"
 	mkdir -p $luna_libs_folder
-	echo "Extracting luna libs"
-	tar xvf $buildpack/lib/lunaclient-min-6.2.0.tar -C $luna_libs_folder
+	
 	echo "*********************************************"
-	#echo $TEST_VAR
+	echo "Lib folder: $luna_libs"
 	echo "*********************************************"
-	echo "Create certificate here..."
-
+	index_url = "http://files.cf-hsm.io/luna-installer/index.yml"
+	curl -O $index_url
+	tar_url = cat index.yml | head -2 | tail -1 | awk '{print $2}'
+	curl -O $tar_url
+	tar_file = `basename $tar_url`
+	tar xvf $tar_file -C $luna_libs_folder
 	echo "*********************************************"
-	echo Check IP
-	ip addr
-	echo "*********************************************"
-	echo "$(cat /tmp/buildpack-release-step.yml)"
-	echo "*********************************************"
+	ls $luna_libs_folder
 
 }
+
 
 
 
