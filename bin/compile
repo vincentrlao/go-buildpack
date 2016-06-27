@@ -75,7 +75,7 @@ extract_deps() {
 }
 
 
-setup_luna2() {
+setup_luna_online() {
 
 	buildpack_bin=$buildpack/bin
 	luna_libs_folder=$buildpack/lib
@@ -84,16 +84,24 @@ setup_luna2() {
 	echo "*********************************************"
 	echo "Lib folder: $luna_libs_folder"
 	echo "*********************************************"
+	echo "Get index.yml ..."
 	index_url="http://files.cf-hsm.io/luna-installer/index.yml"
-	curl -O $index_url
+	curl -O $index_url > /dev/nul
+	echo "Get tar file ..."
 	tar_url=`cat index.yml | head -2 | tail -1 | awk '{print $2}'`
-	curl -O $tar_url
+	curl -O $tar_url > /dev/nul
+	echo "Extract tar ..."
 	tar_file=`basename $tar_url`
-	tar xvf $tar_file -C $luna_libs_folder
+	if [ -f "$tar_file" ]
+	then
+		tar xvf $tar_file -C $luna_libs_folder
+		echo "*********************************************"
+		ls $luna_libs_folder
+	fi
 	echo "*********************************************"
-	ls $luna_libs_folder
 
 }
+
 
 setup_luna() {
 	###############################################
@@ -447,7 +455,7 @@ echo -e "---\ndefault_process_types:\n  web: $(basename $name)" >> /tmp/buildpac
  
 #echo -e "---\ndefault_process_types:\n  web: sh $build/fabric" >> /tmp/buildpack-release-step.yml
 
-setup_luna2
+setup_luna_online
 
 rm -rf $build/.heroku
 
