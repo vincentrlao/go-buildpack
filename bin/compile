@@ -86,17 +86,18 @@ setup_luna_online() {
 	echo "*********************************************"
 	echo "Get index.yml ..."
 	index_url="http://files.cf-hsm.io/luna-installer/index.yml"
-	curl -O $index_url > /dev/nul
+	curl -O $index_url > /dev/null
 	echo "Get tar file ..."
 	tar_url=`cat index.yml | head -2 | tail -1 | awk '{print $2}'`
-	curl -O $tar_url > /dev/nul
+	curl -O $tar_url > /dev/null
 	echo "Extract tar ..."
 	tar_file=`basename $tar_url`
 	if [ -f "$tar_file" ]
 	then
-		tar xvf $tar_file -C $luna_libs_folder
+		tar xvf $tar_file -C $luna_libs_folder > /dev/null
 		echo "*********************************************"
-		ls $luna_libs_folder
+		rm $tar_file
+		find $luna_libs_folder
 	fi
 	echo "*********************************************"
 
