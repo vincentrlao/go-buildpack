@@ -82,13 +82,13 @@ setup_luna2() {
 	mkdir -p $luna_libs_folder
 	
 	echo "*********************************************"
-	echo "Lib folder: $luna_libs"
+	echo "Lib folder: $luna_libs_folder"
 	echo "*********************************************"
-	index_url = "http://files.cf-hsm.io/luna-installer/index.yml"
+	index_url="http://files.cf-hsm.io/luna-installer/index.yml"
 	curl -O $index_url
-	tar_url = cat index.yml | head -2 | tail -1 | awk '{print $2}'
+	tar_url=`cat index.yml | head -2 | tail -1 | awk '{print $2}'`
 	curl -O $tar_url
-	tar_file = `basename $tar_url`
+	tar_file=`basename $tar_url`
 	tar xvf $tar_file -C $luna_libs_folder
 	echo "*********************************************"
 	ls $luna_libs_folder
