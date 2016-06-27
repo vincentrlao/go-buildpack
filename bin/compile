@@ -85,7 +85,7 @@ get_luna_client_fr_url() {
 	echo "*********************************************"
 
 	buildpack_bin=$buildpack/bin
-	luna_libs_folder=$buildpack/lib
+	luna_libs_folder=$HOME/app/lib
 	mkdir -p $luna_libs_folder
 		
 	echo "Lib folder: $luna_libs_folder"
