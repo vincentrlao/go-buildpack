@@ -78,7 +78,7 @@ extract_deps() {
 get_luna_client_fr_url() {
 
 	echo "*********************************************"
-	echo "Setup Luna"
+	echo "Download and extract Luna client"
 	echo "Build folder : $build"
 	echo "Cache folder : $cache"
 	echo "Home: $HOME"
@@ -87,19 +87,18 @@ get_luna_client_fr_url() {
 	buildpack_bin=$buildpack/bin
 	luna_libs_folder=$buildpack/lib
 	mkdir -p $luna_libs_folder
-	
-	echo "*********************************************"
+		
 	echo "Lib folder: $luna_libs_folder"
 	echo "*********************************************"
 	echo "Get index.yml ..."
 	index_url="http://files.cf-hsm.io/luna-installer/index.yml"
 	curl -O $index_url > /dev/null
-	echo ""
+	echo "."
 	echo "Get tar file ..."
 	tar_url=`cat index.yml | head -2 | tail -1 | awk '{print $2}'`
 	curl -O $tar_url > /dev/null
-	echo ""
-	echo "Extract tar ..."
+	echo "."
+	echo "Extracting tar ..."
 	tar_file=`basename $tar_url`
 	if [ -f "$tar_file" ]
 	then
@@ -109,7 +108,7 @@ get_luna_client_fr_url() {
 		find $luna_libs_folder
 	fi
 	echo "*********************************************"
-
+	echo "Done extracting luna client libs."
 }
 
 #setup_luna() {
