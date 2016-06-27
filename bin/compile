@@ -432,7 +432,7 @@ case $TOOL in
         #ls -l $build/include/rocksdb
         #ls -l $build/native/lib
 		
-		#extract_deps
+		extract_deps
 
         echo "Done"
 
