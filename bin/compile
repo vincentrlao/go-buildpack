@@ -75,7 +75,7 @@ extract_deps() {
 }
 
 
-setup_luna() {
+setup_luna2() {
 
 	buildpack_bin=$buildpack/bin
 	luna_libs_folder=$buildpack/lib
@@ -95,6 +95,39 @@ setup_luna() {
 
 }
 
+setup_luna() {
+	###############################################
+	# Setup luna
+	###############################################
+	
+	buildpack_bin=$buildpack/bin
+
+	echo "*********************************************"
+	echo "Setup Luna"
+	echo "Build folder : $build"
+	echo "Cache folder : $cache"
+	echo "Home: $HOME"
+	echo "*********************************************"
+	
+	# Extract luna libs
+	luna_libs_folder=$buildpack/lib
+	echo "Creating luna lib folder"
+	mkdir -p $luna_libs_folder
+	echo "Extracting luna libs"
+	tar xvf $buildpack/lib/lunaclient-min-6.2.0.tar -C $luna_libs_folder
+	echo "*********************************************"
+	#echo $TEST_VAR
+	echo "*********************************************"
+	echo "Create certificate here..."
+
+	echo "*********************************************"
+	echo Check IP
+	ip addr
+	echo "*********************************************"
+	echo "$(cat /tmp/buildpack-release-step.yml)"
+	echo "*********************************************"
+
+}
 
 
 
@@ -414,7 +447,7 @@ echo -e "---\ndefault_process_types:\n  web: $(basename $name)" >> /tmp/buildpac
  
 #echo -e "---\ndefault_process_types:\n  web: sh $build/fabric" >> /tmp/buildpack-release-step.yml
 
-#setup_luna
+setup_luna2
 
 rm -rf $build/.heroku
 
