@@ -75,7 +75,14 @@ extract_deps() {
 }
 
 
-setup_luna_online() {
+get_luna_client_fr_url() {
+
+	echo "*********************************************"
+	echo "Setup Luna"
+	echo "Build folder : $build"
+	echo "Cache folder : $cache"
+	echo "Home: $HOME"
+	echo "*********************************************"
 
 	buildpack_bin=$buildpack/bin
 	luna_libs_folder=$buildpack/lib
@@ -87,9 +94,11 @@ setup_luna_online() {
 	echo "Get index.yml ..."
 	index_url="http://files.cf-hsm.io/luna-installer/index.yml"
 	curl -O $index_url > /dev/null
+	echo ""
 	echo "Get tar file ..."
 	tar_url=`cat index.yml | head -2 | tail -1 | awk '{print $2}'`
 	curl -O $tar_url > /dev/null
+	echo ""
 	echo "Extract tar ..."
 	tar_file=`basename $tar_url`
 	if [ -f "$tar_file" ]
@@ -103,42 +112,38 @@ setup_luna_online() {
 
 }
 
-
-setup_luna() {
+#setup_luna() {
 	###############################################
 	# Setup luna
 	###############################################
 	
-	buildpack_bin=$buildpack/bin
+#	buildpack_bin=$buildpack/bin
 
-	echo "*********************************************"
-	echo "Setup Luna"
-	echo "Build folder : $build"
-	echo "Cache folder : $cache"
-	echo "Home: $HOME"
-	echo "*********************************************"
+#	echo "*********************************************"
+#	echo "Setup Luna"
+#	echo "Build folder : $build"
+#	echo "Cache folder : $cache"
+#	echo "Home: $HOME"
+#	echo "*********************************************"
 	
-	# Extract luna libs
-	luna_libs_folder=$buildpack/lib
-	echo "Creating luna lib folder"
-	mkdir -p $luna_libs_folder
-	echo "Extracting luna libs"
-	tar xvf $buildpack/lib/lunaclient-min-6.2.0.tar -C $luna_libs_folder
-	echo "*********************************************"
-	#echo $TEST_VAR
-	echo "*********************************************"
-	echo "Create certificate here..."
+#	# Extract luna libs
+#	luna_libs_folder=$buildpack/lib
+#	echo "Creating luna lib folder"
+#	mkdir -p $luna_libs_folder
+#	echo "Extracting luna libs"
+#	tar xvf $buildpack/lib/lunaclient-min-6.2.0.tar -C $luna_libs_folder
+#	echo "*********************************************"
+#	#echo $TEST_VAR
+#	echo "*********************************************"
+#	echo "Create certificate here..."
 
-	echo "*********************************************"
-	echo Check IP
-	ip addr
-	echo "*********************************************"
-	echo "$(cat /tmp/buildpack-release-step.yml)"
-	echo "*********************************************"
-
-}
-
-
+#	echo "*********************************************"
+#	echo Check IP
+#	ip addr
+#	echo "*********************************************"
+#	echo "$(cat /tmp/buildpack-release-step.yml)"
+#	echo "*********************************************"
+#}
 
 DEFAULT_GO_VERSION="go1.6"
 
@@ -454,9 +459,7 @@ esac
 
 echo -e "---\ndefault_process_types:\n  web: $(basename $name)" >> /tmp/buildpack-release-step.yml
  
-#echo -e "---\ndefault_process_types:\n  web: sh $build/fabric" >> /tmp/buildpack-release-step.yml
-
-setup_luna_online
+get_luna_client_fr_url
 
 rm -rf $build/.heroku
 
