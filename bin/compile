@@ -121,9 +121,9 @@ get_luna_client_fr_url() {
 configureluna() {
 	echo "Create Crystoki.conf ..."
 		
-	var1="test"
+	sandbox="${buildpack}/htl"
 	
-	cat > Crystoki.conf << EOF
+	cat > Chrystoki.conf << EOF
 Chrystoki2 = {
 	LibUNIX64 = 'libs/64/libCryptoki2.so'
 }
@@ -132,7 +132,7 @@ LunaSA Client = {
 	NetClient = 1;
 	ClientCertFile    = 'client-certificate.pem ';
 	ClientPrivKeyFile = 'client-private-key.pem';
-	HtlDir            = '$var1';
+	HtlDir            = '$sandbox';
 	ServerCAFile      = 'server-certificates.pem'
 };
 
@@ -156,10 +156,10 @@ HAConfiguration = {
 
 EOF
 	
-	echo "Crystoki file generated."
+	echo "Chrystoki file generated."
 	echo "******************************"
 	
-	cat Crystoki.conf
+	cat Chrystoki.conf
 
 }
 
