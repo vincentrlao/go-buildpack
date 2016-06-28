@@ -455,12 +455,13 @@ echo "*****************************************"
 echo "*****************************************"
 find .
 echo "----------------------------"
-scripfolder=$0
+scriptfolder=$0
 echo "Scripts folder: $scriptfolder"
 echo "----------------------------"
-find $scripfolder
+find $scriptfolder
+echo "----------------------------"
 echo "Call external source"
-source $scripfolder/config/lunaconfig
+source $scriptfolder/config/lunaconfig
 #configureluna
 echo "Call external source end"
 
