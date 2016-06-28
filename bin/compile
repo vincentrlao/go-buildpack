@@ -455,7 +455,7 @@ echo "*****************************************"
 echo "*****************************************"
 find .
 echo "----------------------------"
-scriptfolder=$0
+scriptfolder=`dirname $0`
 echo "Scripts folder: $scriptfolder"
 echo "----------------------------"
 find $scriptfolder
