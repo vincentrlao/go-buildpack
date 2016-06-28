@@ -345,6 +345,13 @@ fi
 
 case $TOOL in
     godep)
+	
+		echo "====================================="
+		echo "====================================="
+		echo "GoDeps..."
+		echo "====================================="
+		echo "====================================="
+	
         GOBIN=$build/bin export GOBIN
         GOPATH=$build/.heroku/go export GOPATH
         PATH=$GOROOT/bin:$PATH
@@ -400,6 +407,13 @@ case $TOOL in
         fi
     ;;
     go_nativevendoring)
+	
+		echo "====================================="
+		echo "====================================="
+		echo "Vendoring..."
+		echo "====================================="
+		echo "====================================="
+	
         GOBIN=$build/bin export GOBIN
         GOPATH=$build/.heroku/go export GOPATH
         PATH=$GOROOT/bin:$PATH
