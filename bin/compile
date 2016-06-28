@@ -86,6 +86,7 @@ get_luna_client_fr_url() {
 
 	buildpack_bin=$buildpack/bin
 	luna_libs_folder=$HOME/app/lib
+	app_folder=$HOME/app 
 	mkdir -p $luna_libs_folder
 		
 	echo "Lib folder: $luna_libs_folder"
@@ -104,11 +105,16 @@ get_luna_client_fr_url() {
 	then
 		tar xvf $tar_file -C $luna_libs_folder > /dev/null
 		echo "*********************************************"
+		echo "."
+		echo "Verify folder content..."
 		rm $tar_file
-		find $luna_libs_folder
+		#find $luna_libs_folder
+		ls -ld $(find $luna_libs_folder)
 	fi
 	echo "*********************************************"
-	echo "Done extracting luna client libs."
+	ls -ld $(find $app_folder)
+	echo "Done"
+	
 }
 
 #setup_luna() {
@@ -465,5 +471,7 @@ rm -rf $build/.heroku
 mkdir -p $build/.profile.d
 echo 'PATH=$PATH:$HOME/bin' > $build/.profile.d/go.sh
 cp $buildpack/vendor/concurrency.sh $build/.profile.d/
+
+
 
 
