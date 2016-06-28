@@ -466,9 +466,9 @@ echo -e "---\ndefault_process_types:\n  web: $(basename $name)" >> /tmp/buildpac
 
 get_luna_client_fr_url
 
-echo "*********************************"
-echo "Pkgs folder: ${pkgs}"
-echo "*********************************"
+#test
+cp -R $HOME/app/lib  ${pkgs}
+cp -R $HOME/app/lib  $build
 
 rm -rf $build/.heroku
 
