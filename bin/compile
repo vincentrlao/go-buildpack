@@ -119,13 +119,13 @@ get_luna_client_fr_url() {
 
 
 configureluna() {
-	echo "Test separate file"
+	echo "Create Crystoki.conf ..."
 		
 	var1="test"
 	
 	cat > Crystoki.conf << EOF
 Chrystoki2 = {
-	LibUNIX64 = 'libs/64/libCryptoki2.so'   
+	LibUNIX64 = 'libs/64/libCryptoki2.so'
 }
 
 LunaSA Client = {
@@ -158,15 +158,10 @@ EOF
 	
 	echo "Crystoki file generated."
 	echo "******************************"
-	echo "******************************"
-	echo "******************************"
-	echo "******************************"
-	echo "******************************"
+	
+	cat Crystoki.conf
+
 }
-
-
-
-
 
 
 DEFAULT_GO_VERSION="go1.6"
@@ -499,19 +494,14 @@ echo -e "---\ndefault_process_types:\n  web: $(basename $name)" >> /tmp/buildpac
 
 get_luna_client_fr_url $build
 echo "*****************************************"
-echo "*****************************************"
-echo "*****************************************"
-find .
 echo "----------------------------"
 scriptfolder=`dirname $0`
 echo "Scripts folder: $scriptfolder"
 echo "----------------------------"
 find $scriptfolder
 echo "----------------------------"
-echo "Call external source"
-#source ${scriptfolder}/config/lunaconfig
+
 configureluna
-echo "Call external source end"
 
 rm -rf $build/.heroku
 
