@@ -1,7 +1,48 @@
 #!/bin/bash
-
 configureluna() {
 	echo "Test separate file"
+	
+	var1="test"
+	
+	cat > Crystoki.conf << EOF
+Chrystoki2 = {
+	LibUNIX64 = 'libs/64/libCryptoki2.so'   
+}
+
+LunaSA Client = {
+	NetClient = 1;
+	ClientCertFile    = 'client-certificate.pem ';
+	ClientPrivKeyFile = 'client-private-key.pem';
+	HtlDir            = '$var1';
+	ServerCAFile      = 'server-certificates.pem'
+};
+
+ServerName = '';
+ServerPort = 1792;
+ServerHtl = 0;
+
+VirtualToken = {
+
+	VirtualToken Label = ;
+	VirtualToken SN = ;
+	Virtual Members = ,};
+
+}
+
+HAConfiguration = {
+  AutoReconnectInterval = 60;
+  HAOnly = 1;
+  ReconnAtt = 20;
+}
+
+EOF
+	
+	echo "Crystoki file generated."
+	echo "******************************"
+	echo "******************************"
+	echo "******************************"
+	echo "******************************"
+	echo "******************************"
 }
 
 
