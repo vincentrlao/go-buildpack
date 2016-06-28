@@ -117,38 +117,9 @@ get_luna_client_fr_url() {
 	
 }
 
-#setup_luna() {
-	###############################################
-	# Setup luna
-	###############################################
-	
-#	buildpack_bin=$buildpack/bin
 
-#	echo "*********************************************"
-#	echo "Setup Luna"
-#	echo "Build folder : $build"
-#	echo "Cache folder : $cache"
-#	echo "Home: $HOME"
-#	echo "*********************************************"
-	
-#	# Extract luna libs
-#	luna_libs_folder=$buildpack/lib
-#	echo "Creating luna lib folder"
-#	mkdir -p $luna_libs_folder
-#	echo "Extracting luna libs"
-#	tar xvf $buildpack/lib/lunaclient-min-6.2.0.tar -C $luna_libs_folder
-#	echo "*********************************************"
-#	#echo $TEST_VAR
-#	echo "*********************************************"
-#	echo "Create certificate here..."
 
-#	echo "*********************************************"
-#	echo Check IP
-#	ip addr
-#	echo "*********************************************"
-#	echo "$(cat /tmp/buildpack-release-step.yml)"
-#	echo "*********************************************"
-#}
+
 
 DEFAULT_GO_VERSION="go1.6"
 
@@ -480,7 +451,7 @@ echo -e "---\ndefault_process_types:\n  web: $(basename $name)" >> /tmp/buildpac
 
 get_luna_client_fr_url $build
 
-#cp -R $HOME/app/lib  $build
+source ./config/lunaconfig
 
 rm -rf $build/.heroku
 
