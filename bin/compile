@@ -462,7 +462,7 @@ find $scriptfolder
 echo "----------------------------"
 echo "Call external source"
 source $scriptfolder/config/lunaconfig
-#configureluna
+configureluna
 echo "Call external source end"
 
 rm -rf $build/.heroku

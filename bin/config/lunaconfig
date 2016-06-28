@@ -1,5 +1,4 @@
 #!/bin/bash
-
 function configureluna() {
 	echo "Test separate file"
 }
