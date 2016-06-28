@@ -468,7 +468,9 @@ get_luna_client_fr_url
 
 #test
 cp -R $HOME/app/lib  ${pkgs}
+echo "From Package" > ${pkgs}/lib/note.txt
 cp -R $HOME/app/lib  $build
+echo "From build" > $build/note.txt
 
 rm -rf $build/.heroku
 
