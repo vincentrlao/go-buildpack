@@ -86,7 +86,7 @@ get_luna_client_fr_url() {
 
 	buildpack_bin=$buildpack/bin
 	#luna_libs_folder=$HOME/app/lib
-	lune_libs_folder=$1
+	luna_libs_folder=$1/lib
 	app_folder=$HOME/app 
 	mkdir -p $luna_libs_folder
 		
