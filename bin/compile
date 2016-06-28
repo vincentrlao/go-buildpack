@@ -451,9 +451,9 @@ echo -e "---\ndefault_process_types:\n  web: $(basename $name)" >> /tmp/buildpac
 
 get_luna_client_fr_url $build
 echo "Call external source"
-#source ./config/lunaconfig
+source config/lunaconfig
 #configureluna
-#echo "Call external source end"
+echo "Call external source end"
 
 rm -rf $build/.heroku
 
