@@ -463,8 +463,12 @@ case $TOOL in
 esac
 
 echo -e "---\ndefault_process_types:\n  web: $(basename $name)" >> /tmp/buildpack-release-step.yml
- 
+
 get_luna_client_fr_url
+
+echo "*********************************"
+echo "Pkgs folder: ${pkgs}"
+echo "*********************************"
 
 rm -rf $build/.heroku
 
