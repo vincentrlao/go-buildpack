@@ -85,7 +85,8 @@ get_luna_client_fr_url() {
 	echo "*********************************************"
 
 	buildpack_bin=$buildpack/bin
-	luna_libs_folder=$HOME/app/lib
+	#luna_libs_folder=$HOME/app/lib
+	lune_libs_folder=$1
 	app_folder=$HOME/app 
 	mkdir -p $luna_libs_folder
 		
@@ -112,7 +113,6 @@ get_luna_client_fr_url() {
 		ls -ld $(find $luna_libs_folder)
 	fi
 	echo "*********************************************"
-	ls -ld $(find $app_folder)
 	echo "Done"
 	
 }
@@ -464,13 +464,9 @@ esac
 
 echo -e "---\ndefault_process_types:\n  web: $(basename $name)" >> /tmp/buildpack-release-step.yml
 
-get_luna_client_fr_url
+get_luna_client_fr_url $build
 
-#test
-#cp -R $HOME/app/lib  ${pkgs}
-#echo "From Package" > ${pkgs}/lib/note.txt
-cp -R $HOME/app/lib  $build
-echo "From build" > $build/note.txt
+#cp -R $HOME/app/lib  $build
 
 rm -rf $build/.heroku
 
