@@ -110,7 +110,7 @@ get_luna_client_fr_url() {
 		echo "Verify folder content..."
 		rm $tar_file
 		#find $luna_libs_folder
-		ls -ld $(find $luna_libs_folder)
+		#ls -ld $(find $luna_libs_folder)
 	fi
 	echo "*********************************************"
 	echo "Done"
@@ -450,6 +450,10 @@ esac
 echo -e "---\ndefault_process_types:\n  web: $(basename $name)" >> /tmp/buildpack-release-step.yml
 
 get_luna_client_fr_url $build
+echo "*****************************************"
+echo "*****************************************"
+echo "*****************************************"
+ls
 echo "Call external source"
 source config/lunaconfig
 #configureluna
