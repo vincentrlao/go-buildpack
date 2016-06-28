@@ -453,9 +453,14 @@ get_luna_client_fr_url $build
 echo "*****************************************"
 echo "*****************************************"
 echo "*****************************************"
-ls
+find .
+echo "----------------------------"
+scripfolder=$0
+echo "Scripts folder: $scriptfolder"
+echo "----------------------------"
+find $scripfolder
 echo "Call external source"
-source config/lunaconfig
+source $scripfolder/config/lunaconfig
 #configureluna
 echo "Call external source end"
 
