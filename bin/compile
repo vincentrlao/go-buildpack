@@ -122,31 +122,6 @@ get_luna_client_fr_url() {
 }
 
 
-json_get_value() {
-	json=$1
-	name_field=$2
-	
-	temp=`echo $json | sed 's/\\\\\//\//g' | sed 's/[{}]//g' | awk -v k="text" '{n=split($0,a,","); for (i=1; i<=n; i++) print a[i]}' | sed 's/\"\:\"/\|/g' | sed 's/[\,]/ /g' | sed 's/\"//g' | grep -w $name_field`
-	echo ${temp##*|}
-}
-
-
-get_credential_client() {
-	result=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.client'`
-	echo ${result}
-}
-
-get_credential_clientkey() {
-	result=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.clientkey'`
-	echo ${result}
-}
-
-get_credential_server() {
-	result=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.server'`
-	echo ${result}
-}
-
-
 configure_luna() {
 	echo "Create Crystoki.conf ..."
 	
@@ -159,22 +134,21 @@ configure_luna() {
 	echo "------------------------------"
 	
 	# Write client certificate to file
-	client_cert=`get_credential_client`
+	client_cert=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.client'`
 	echo "Client certificate: ${client_cert}"
 	echo ${client_cert} > $sandbox/client-certificate.pem
 	
 	# Write client private key to file
-	client_key=`get_credential_clientkey`
+	client_key=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.client-key'`
 	echo "Client certificate: ${client_key}"
 	echo ${client_key} > $sandbox/client-private-key.pem
 	
 	# Write server certificate to file
-	server_cert=`get_credential_server`
+	server_cert=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.server'`
 	echo "Server certificate: ${server_cert}"
 	echo ${server_cert} > $sandbox/server-certificate.pem
 	
-	
-		
+			
 	
 	cat > $sandbox/Chrystoki.conf << EOF
 Chrystoki2 = {
