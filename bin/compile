@@ -127,6 +127,8 @@ configureluna() {
 	certificate="test"
 	echo "CUPS Data: ${client} ${server}"
 	
+	echo "VCAP: ${VCAP}"
+	
 	client_cert=${certificate}
 	
 	echo $client_cert > $sandbox/client-certificate.pem
