@@ -128,6 +128,9 @@ configureluna() {
 	echo "CUPS Data: ${client} ${server}"
 	
 	echo "VCAP: ${VCAP}"
+	echo "VCAP_APPLICATION: ${VCAP_APPLICATION}"
+	echo "VCAP_SERVICES: ${VCAP_SERVICES}"
+	
 	
 	client_cert=${certificate}
 	
