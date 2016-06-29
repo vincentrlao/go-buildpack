@@ -127,23 +127,29 @@ json_get_value() {
 }
 
 
+get_client_credential() {
+	json=$1
+	echo $json | ../linux-amd64/bin/jq '."user-provided"[].credentials.client'
+}
+
+
 configure_luna() {
 	echo "Create Crystoki.conf ..."
 	
 	sandbox="${buildpack}"
 	htldir="${buildpack}/htl"
 	
-	echo "CUPS Data: "
+	echo "------------------------------"
+	echo "CUPS Data JSON: ${VCAP_SERVICES}"
+	echo "------------------------------"
 	
 	vcap_json=${VCAP_SERVICES}
-	client_cert=`json_get_value ${vcap_json} client`
+	client_cert=`get_client_crendential ${vcap_json}`
 	
 	echo "Client certificate: ${client_cert}"
 	
 	
 	echo $client_cert > $sandbox/client-certificate.pem
-	
-	
 	
 	
 	cat > $sandbox/Chrystoki.conf << EOF
