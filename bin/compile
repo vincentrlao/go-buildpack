@@ -131,9 +131,18 @@ json_get_value() {
 }
 
 
-get_credential() {
-	field=$1
-	result=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.${field}'`
+get_credential_client() {
+	result=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.client'`
+	echo ${result}
+}
+
+get_credential_clientkey() {
+	result=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.clientkey'`
+	echo ${result}
+}
+
+get_credential_server() {
+	result=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.server'`
 	echo ${result}
 }
 
@@ -150,17 +159,17 @@ configure_luna() {
 	echo "------------------------------"
 	
 	# Write client certificate to file
-	client_cert=`get_credential client`
+	client_cert=`get_credential_client`
 	echo "Client certificate: ${client_cert}"
 	echo ${client_cert} > $sandbox/client-certificate.pem
 	
 	# Write client private key to file
-	client_key=`get_credential clientkey`
+	client_key=`get_credential_clientkey`
 	echo "Client certificate: ${client_key}"
 	echo ${client_key} > $sandbox/client-private-key.pem
 	
 	# Write server certificate to file
-	server_cert=`get_credential server`
+	server_cert=`get_credential_server`
 	echo "Server certificate: ${server_cert}"
 	echo ${server_cert} > $sandbox/server-certificate.pem
 	
