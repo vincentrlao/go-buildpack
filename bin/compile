@@ -118,21 +118,29 @@ get_luna_client_fr_url() {
 }
 
 
-configureluna() {
+json_get_value() {
+	json=$1
+	name_field=$2
+	
+	temp=`echo $json | sed 's/\\\\\//\//g' | sed 's/[{}]//g' | awk -v k="text" '{n=split($0,a,","); for (i=1; i<=n; i++) print a[i]}' | sed 's/\"\:\"/\|/g' | sed 's/[\,]/ /g' | sed 's/\"//g' | grep -w $prop`
+	echo ${temp##*|}
+
+}
+
+
+configure_luna() {
 	echo "Create Crystoki.conf ..."
 	
 	sandbox="${buildpack}"
 	htldir="${buildpack}/htl"
 	
-	certificate="test"
-	echo "CUPS Data: ${client} ${server}"
+	echo "CUPS Data: "
 	
-	echo "VCAP: ${VCAP}"
-	echo "VCAP_APPLICATION: ${VCAP_APPLICATION}"
-	echo "VCAP_SERVICES: ${VCAP_SERVICES}"
+	vcap_json=${VCAP_SERVICES}
+	client_cert=`json_get_value ${vcap_json} client`
 	
+	echo "Client certificate: ${client_cert}"
 	
-	client_cert=${certificate}
 	
 	echo $client_cert > $sandbox/client-certificate.pem
 	
@@ -517,7 +525,7 @@ echo "----------------------------"
 find $scriptfolder
 echo "----------------------------"
 
-configureluna
+configure_luna
 
 rm -rf $build/.heroku
 
