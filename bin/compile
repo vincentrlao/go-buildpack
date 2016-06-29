@@ -134,7 +134,7 @@ json_get_value() {
 get_client_credential() {
 	json=${VCAP_SERVICES}
 	result=`echo ${json} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.client'`
-	return ${result}
+	echo ${result}
 }
 
 
@@ -149,8 +149,7 @@ configure_luna() {
 	echo "CUPS JSON Data: ${vcap_json}"
 	echo "------------------------------"
 	
-	get_client_credential
-	client_cert=$?
+	client_cert=`get_client_credential`
 	
 	echo "Client certificate: ${client_cert}"
 		
