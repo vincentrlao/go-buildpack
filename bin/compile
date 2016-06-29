@@ -12,6 +12,8 @@ echo "Current folder: ${currentDir}"
 
 scriptDir=`dirname $0`
 
+chmod 555 ${scriptDir}/../linux-amd64/bin/jq
+
 TOOL=""
 YELLOW='\033[1;33m'
 RED='\033[1;31m'
@@ -146,7 +148,7 @@ configure_luna() {
 	echo "------------------------------"
 	
 	echo "Script dir:"
-	ls ${scriptDir}
+	ls ${scriptDir}/..
 	
 	vcap_json=${VCAP_SERVICES}
 	client_cert=`get_client_credential ${vcap_json}`
