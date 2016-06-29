@@ -10,7 +10,7 @@ echo "Env Dir: $3"
 currentDir=`pwd`
 echo "Current folder: ${currentDir}"
 
-scriptDir=`echo $0 | dirname`
+scriptDir=`dirname $0`
 
 TOOL=""
 YELLOW='\033[1;33m'
