@@ -149,7 +149,7 @@ configure_luna() {
 	ls ${scriptDir}
 	
 	vcap_json=${VCAP_SERVICES}
-	client_cert=`get_client_crendential ${vcap_json}`
+	client_cert=`get_client_credential ${vcap_json}`
 	
 	echo "Client certificate: ${client_cert}"
 	
