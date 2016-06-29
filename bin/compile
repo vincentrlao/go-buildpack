@@ -10,6 +10,8 @@ echo "Env Dir: $3"
 currentDir=`pwd`
 echo "Current folder: ${currentDir}"
 
+scriptDir=`echo $0 | dirname`
+
 TOOL=""
 YELLOW='\033[1;33m'
 RED='\033[1;31m'
@@ -129,7 +131,7 @@ json_get_value() {
 
 get_client_credential() {
 	json=$1
-	echo ${json} | ../linux-amd64/bin/jq '."user-provided"[].credentials.client'
+	echo ${json} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.client'
 }
 
 
@@ -140,11 +142,11 @@ configure_luna() {
 	htldir="${buildpack}/htl"
 	
 	echo "------------------------------"
-	echo "CUPS Data JSON: ${VCAP_SERVICES}"
+	echo "CUPS JSON Data: ${VCAP_SERVICES}"
 	echo "------------------------------"
 	
-	pwd 
-	ls ../
+	echo "Script dir:"
+	ls ${scriptDir}
 	
 	vcap_json=${VCAP_SERVICES}
 	client_cert=`get_client_crendential ${vcap_json}`
