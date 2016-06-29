@@ -139,7 +139,7 @@ configure_luna() {
 	echo ${client_cert} > $sandbox/client-certificate.pem
 	
 	# Write client private key to file
-	client_key=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.client-key'`
+	client_key=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials."client-key"'`
 	echo "Client certificate: ${client_key}"
 	echo ${client_key} > $sandbox/client-private-key.pem
 	
