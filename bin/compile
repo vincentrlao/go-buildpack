@@ -133,7 +133,8 @@ json_get_value() {
 
 get_client_credential() {
 	json=$1
-	echo ${json} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.client'
+	result=`echo ${json} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.client'`
+	echo ${result}
 }
 
 
@@ -148,7 +149,6 @@ configure_luna() {
 	echo "------------------------------"
 	
 	echo "Script dir:"
-	ls ${scriptDir}/..
 	
 	vcap_json=${VCAP_SERVICES}
 	client_cert=`get_client_credential ${vcap_json}`
