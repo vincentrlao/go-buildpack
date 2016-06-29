@@ -131,9 +131,9 @@ json_get_value() {
 }
 
 
-get_client_credential() {
-	json=${VCAP_SERVICES}
-	result=`echo ${json} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.client'`
+get_credential() {
+	field=$1
+	result=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.${field}'`
 	echo ${result}
 }
 
@@ -149,12 +149,23 @@ configure_luna() {
 	echo "CUPS JSON Data: ${vcap_json}"
 	echo "------------------------------"
 	
-	client_cert=`get_client_credential`
-	
+	# Write client certificate to file
+	client_cert=`get_credential client`
 	echo "Client certificate: ${client_cert}"
-		
-	echo $client_cert > $sandbox/client-certificate.pem
+	echo ${client_cert} > $sandbox/client-certificate.pem
 	
+	# Write client private key to file
+	client_key=`get_credential clientkey`
+	echo "Client certificate: ${client_key}"
+	echo ${client_key} > $sandbox/client-private-key.pem
+	
+	# Write server certificate to file
+	server_cert=`get_credential server`
+	echo "Server certificate: ${server_cert}"
+	echo ${server_cert} > $sandbox/server-certificate.pem
+	
+	
+		
 	
 	cat > $sandbox/Chrystoki.conf << EOF
 Chrystoki2 = {
