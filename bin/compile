@@ -162,10 +162,7 @@ configure_luna() {
 	servername=`echo ${tmpvar} | tr -d '"'`
 	echo "Server name: ${servername}"
 			
-	#debug
-	cp ${scriptDir}/../linux-amd64/bin/testlunago ${build}/lib
-	
-	# 
+	# Set HTL
 	htldir="lib/htl"
 	
 	cat > ${sandbox}/Chrystoki.conf << EOF
