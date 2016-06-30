@@ -128,7 +128,7 @@ configure_luna() {
 	
 	#Build environment
 	sandbox="${build}/lib"
-	htldir="${HOME}/lib/htl"
+	htldir="${HOME}/app/lib/htl"
 	
 	vcap_json=${VCAP_SERVICES}
 	echo "------------------------------"
@@ -168,17 +168,16 @@ configure_luna() {
 	
 	cat > ${sandbox}/Chrystoki.conf << EOF
 Chrystoki2 = {
-	LibUNIX = ${HOME}/app/lib/libs/64/libCryptoki2.so;
-	LibUNIX64 = ${HOME}/app/lib/libs/64/libCryptoki2.so;
-	
+LibUNIX = ${HOME}/app/lib/libs/64/libCryptoki2.so;
+LibUNIX64 = ${HOME}/app/lib/libs/64/libCryptoki2.so;
 }
 
 LunaSA Client = {
-	NetClient = 1;
-	ClientCertFile    = client-certificate.pem;
-	ClientPrivKeyFile = client-private-key.pem;
-	HtlDir            = ${htldir};
-	ServerCAFile      = server-certificates.pem;
+NetClient = 1;
+ClientCertFile = ${sandbox}/client-certificate.pem;
+ClientPrivKeyFile = ${sandbox}/client-private-key.pem;
+HtlDir = ${htldir};
+ServerCAFile = ${sandbox}/server-certificates.pem;
 };
 
 ServerName00 = ${servername};
@@ -186,17 +185,15 @@ ServerPort00 = 1792;
 ServerHtl00 = 0;
 
 VirtualToken = {
-
-	VirtualToken00Label = ${VLabel};
-	VirtualToken00SN = 1${Vmember};
-	Virtual00Members = ${Vmember};
-
+VirtualToken00Label = ${VLabel};
+VirtualToken00SN = 1${Vmember};
+Virtual00Members = ${Vmember};
 }
 
 HAConfiguration = {
-  AutoReconnectInterval = 60;
-  HAOnly = 1;
-  ReconnAtt = 20;
+AutoReconnectInterval = 60;
+HAOnly = 1;
+ReconnAtt = 20;
 }
 
 EOF
