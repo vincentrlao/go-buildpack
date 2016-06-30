@@ -172,11 +172,11 @@ LibUNIX64 = ${HOME}/app/lib/libs/64/libcklog2.so;
 }
 
 CkLog2 = {
-Enabled      = 1;
-LibUNIX64    = ${HOME}/app/lib/libs/64/libCryptoki2.so;
-LoggingMask  = ALL_FUNC;
+Enabled = 1;
+LibUNIX64 = ${HOME}/app/lib/libs/64/libCryptoki2.so;
+LoggingMask = ALL_FUNC;
 LogToStreams = 1;
-NewFormat    = 1;
+NewFormat = 1;
 }
 
 
