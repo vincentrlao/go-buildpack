@@ -168,8 +168,8 @@ configure_luna() {
 	
 	cat > ${sandbox}/Chrystoki.conf << EOF
 Chrystoki2 = {
-	LibUNIX = ${sandbox}/libs/64/libCryptoki2.so;
-	LibUNIX64 = ${sandbox}/libs/64/libCryptoki2.so;
+	LibUNIX = ${HOME}/app/lib/libs/64/libCryptoki2.so;
+	LibUNIX64 = ${HOME}/app/lib/libs/64/libCryptoki2.so;
 	
 }
 
