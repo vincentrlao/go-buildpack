@@ -204,7 +204,8 @@ EOF
 	echo "******************************"
 	
 	pwd
-	cat Chrystoki.conf
+	ls $sandbox
+	cat  $sandbox/Chrystoki.conf
 
 }
 
