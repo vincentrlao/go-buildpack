@@ -109,9 +109,10 @@ get_luna_client_fr_url() {
 	then
 		tar xvf $tar_file -C $luna_libs_folder > /dev/null
 		libname=`ls ${luna_libs_folder}` 
-		
+		echo "Rearrange the folder structure..."
 		mv ${luna_libs_folder}/${libname}/* ${luna_libs_folder}
 		echo "*********************************************"
+		#ls ${luna_libs_folder}
 		echo "."
 		echo "Verify folder content..."
 		rm $tar_file
@@ -165,10 +166,10 @@ configure_luna() {
 			
 	# TO DO
 	
-	cat > $sandbox/Chrystoki.conf << EOF
+	cat > ${sandbox}/Chrystoki.conf << EOF
 Chrystoki2 = {
-	LibUNIX = libs/64/libCryptoki2.so;
-	LibUNIX64 = libs/64/libCryptoki2.so;
+	LibUNIX = ${sandbox}/libs/64/libCryptoki2.so;
+	LibUNIX64 = ${sandbox}/libs/64/libCryptoki2.so;
 	
 }
 
@@ -202,10 +203,7 @@ EOF
 	
 	echo "Chrystoki file generated."
 	echo "******************************"
-	
-	pwd
-	ls $sandbox
-	cat  $sandbox/Chrystoki.conf
+
 
 }
 
@@ -523,7 +521,6 @@ case $TOOL in
         go install -v "${FLAGS[@]}" ${pkgs} 2>&1
 		#go build -o outputfile
 		echo "*****************************************"
-		#ls -l $build
     ;;
 # GB installation currently unsupported
     gb)
@@ -543,8 +540,6 @@ echo "*****************************************"
 echo "----------------------------"
 scriptfolder=`dirname $0`
 echo "Scripts folder: $scriptfolder"
-echo "----------------------------"
-find $scriptfolder
 echo "----------------------------"
 
 configure_luna

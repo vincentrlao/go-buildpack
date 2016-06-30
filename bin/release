@@ -2,7 +2,7 @@
 
 # bin/release <build-dir>
 
-export ChrystokiConfigurationPath=${HOME}/lib
+export ChrystokiConfigurationPath=${HOME}/app/lib
 
 echo "$(cat /tmp/buildpack-release-step.yml)"
 
