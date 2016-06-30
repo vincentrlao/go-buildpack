@@ -146,8 +146,7 @@ configure_luna() {
 	# Write server certificate to file
 	server_cert=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.servers[].certificate'`
 	echo ${server_cert} | sed 's/\\n/\n/g' > $sandbox/server-certificate.pem
-	
-		
+			
 	# Label
 	tmpvar=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.groups[].label'`
 	VLabel=`echo ${tmpvar} | tr -d '"'`
@@ -164,7 +163,7 @@ configure_luna() {
 	echo "Server name: ${servername}"
 			
 			
-	# TO DO
+	# 
 	
 	cat > ${sandbox}/Chrystoki.conf << EOF
 
@@ -184,10 +183,10 @@ CkLog2 = {
 
 LunaSA Client = {
 NetClient = 1;
-ClientCertFile = ${sandbox}/client-certificate.pem;
-ClientPrivKeyFile = ${sandbox}/client-private-key.pem;
+ClientCertFile = ${HOME}/app/lib/client-certificate.pem;
+ClientPrivKeyFile = ${HOME}/app/lib/client-private-key.pem;
 HtlDir = ${htldir};
-ServerCAFile = ${sandbox}/server-certificates.pem;
+ServerCAFile = ${HOME}/app/lib/server-certificates.pem;
 };
 
 ServerName00 = ${servername};
