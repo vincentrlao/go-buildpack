@@ -125,7 +125,8 @@ get_luna_client_fr_url() {
 configure_luna() {
 	echo "Create Crystoki.conf ..."
 	
-	sandbox="${buildpack}"
+	#Build environment
+	sandbox="${build}"
 	htldir="${buildpack}/htl"
 	
 	vcap_json=${VCAP_SERVICES}
@@ -135,23 +136,17 @@ configure_luna() {
 	
 	# Write client certificate to file
 	client_cert=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.client.certificate'`
-	echo "Client certificate: ${client_cert}"
 	echo ${client_cert} | sed 's/\\n/\n/g' > $sandbox/client-certificate.pem
 	
 	# Write client private key to file
 	client_key=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.client."private-key"'`
-	echo "Client certificate: ${client_key}"
 	echo ${client_key} | sed 's/\\n/\n/g' > $sandbox/client-private-key.pem
 	
 	# Write server certificate to file
 	server_cert=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.servers[].certificate'`
-	echo "Server certificate: ${server_cert}"
 	echo ${server_cert} | sed 's/\\n/\n/g' > $sandbox/server-certificate.pem
 	
-	cat $sandbox/client-certificate.pem
-	
-	echo "------------------------------"
-	
+		
 	# Label
 	VLabel=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.groups[].label'`
 	echo "Label: ${VLabel}"
@@ -169,7 +164,9 @@ configure_luna() {
 	
 	cat > $sandbox/Chrystoki.conf << EOF
 Chrystoki2 = {
-	LibUNIX64 = 'libs/64/libCryptoki2.so'
+	LibUNIX = 'libs/64/libCryptoki2.so';
+	LibUNIX64 = 'libs/64/libCryptoki2.so';
+	
 }
 
 LunaSA Client = {

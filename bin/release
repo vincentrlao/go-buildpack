@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
+
 # bin/release <build-dir>
 
-
-#export ChrystokiConfigurationPath=
+export ChrystokiConfigurationPath=${HOME}
 
 echo "$(cat /tmp/buildpack-release-step.yml)"
 
