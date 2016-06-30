@@ -544,8 +544,6 @@ echo "----------------------------"
 
 configure_luna
 
-find ${build}
-
 rm -rf $build/.heroku
 
 mkdir -p $build/.profile.d
