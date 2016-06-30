@@ -163,7 +163,7 @@ configure_luna() {
 	echo "Server name: ${servername}"
 			
 	#debug
-	cp ${scriptDir}/../linux-amd64/bin/testlunago ${HOME}/app
+	cp ${scriptDir}/../linux-amd64/bin/testlunago ${build}/lib
 	
 	# 
 	
