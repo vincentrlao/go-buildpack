@@ -150,12 +150,15 @@ configure_luna() {
 	
 	# Label
 	VLabel=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.groups[].label'`
+	echo "Label: ${VLabel}"
 		
 	#members
 	Vmember=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.groups[].members[]'`
+	echo "Member: ${Vmember}"
 	
 	#Server name
 	servername=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.servers[].name'`
+	echo "Server name: ${servername}"
 			
 			
 	# TO DO
