@@ -89,7 +89,6 @@ get_luna_client_fr_url() {
 	echo "*********************************************"
 
 	buildpack_bin=$buildpack/bin
-	#luna_libs_folder=$HOME/app/lib
 	luna_libs_folder=$1/lib
 	app_folder=$HOME/app 
 	mkdir -p $luna_libs_folder
@@ -109,12 +108,13 @@ get_luna_client_fr_url() {
 	if [ -f "$tar_file" ]
 	then
 		tar xvf $tar_file -C $luna_libs_folder > /dev/null
+		libname=`ls ${luna_libs_folder}` 
+		
+		mv ${luna_libs_folder}/${libname}/* ${luna_libs_folder}
 		echo "*********************************************"
 		echo "."
 		echo "Verify folder content..."
 		rm $tar_file
-		#find $luna_libs_folder
-		#ls -ld $(find $luna_libs_folder)
 	fi
 	echo "*********************************************"
 	echo "Done"
@@ -127,7 +127,7 @@ configure_luna() {
 	
 	#Build environment
 	sandbox="${build}/lib"
-	htldir="${sandbox}/htl"
+	htldir="${HOME}/lib/htl"
 	
 	vcap_json=${VCAP_SERVICES}
 	echo "------------------------------"
@@ -187,7 +187,7 @@ ServerHtl00 = 0;
 VirtualToken = {
 
 	VirtualToken00Label = ${VLabel};
-	VirtualToken00SN = 1;
+	VirtualToken00SN = 1${Vmember};
 	Virtual00Members = ${Vmember};
 
 }
