@@ -137,15 +137,15 @@ configure_luna() {
 	
 	# Write client certificate to file
 	client_cert=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.client.certificate'`
-	echo ${client_cert} | sed 's/\\n/\n/g' > $sandbox/client-certificate.pem
+	echo ${client_cert} | sed 's/\\n/\n/g' | tr -d '"' > $sandbox/client-certificate.pem
 	
 	# Write client private key to file
 	client_key=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.client."private-key"'`
-	echo ${client_key} | sed 's/\\n/\n/g' > $sandbox/client-private-key.pem
+	echo ${client_key} | sed 's/\\n/\n/g' | tr -d '"' > $sandbox/client-private-key.pem
 	
 	# Write server certificate to file
 	server_cert=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.servers[].certificate'`
-	echo ${server_cert} | sed 's/\\n/\n/g' > $sandbox/server-certificate.pem
+	echo ${server_cert} | sed 's/\\n/\n/g' | tr -d '"' > $sandbox/server-certificate.pem
 			
 	# Label
 	tmpvar=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.groups[].label'`
