@@ -136,17 +136,17 @@ configure_luna() {
 	# Write client certificate to file
 	client_cert=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.client.certificate'`
 	echo "Client certificate: ${client_cert}"
-	echo ${client_cert} | tr -d '\r' > $sandbox/client-certificate.pem
+	echo ${client_cert} | tr '\\n' '\r' > $sandbox/client-certificate.pem
 	
 	# Write client private key to file
 	client_key=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.client."private-key"'`
 	echo "Client certificate: ${client_key}"
-	echo ${client_key} | tr -d '\r' > $sandbox/client-private-key.pem
+	echo ${client_key} | tr '\\n' '\r' > $sandbox/client-private-key.pem
 	
 	# Write server certificate to file
 	server_cert=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.servers[].certificate'`
 	echo "Server certificate: ${server_cert}"
-	echo ${server_cert} | tr -d '\r' > $sandbox/server-certificate.pem
+	echo ${server_cert} | tr '\\n' '\r' > $sandbox/server-certificate.pem
 	
 	cat $sandbox/client-certificate.pem
 	
