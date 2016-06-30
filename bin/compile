@@ -134,21 +134,31 @@ configure_luna() {
 	echo "------------------------------"
 	
 	# Write client certificate to file
-	client_cert=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.client'`
+	#client_cert=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.client.certificate'`
 	echo "Client certificate: ${client_cert}"
 	echo ${client_cert} > $sandbox/client-certificate.pem
 	
 	# Write client private key to file
-	client_key=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials."client-key"'`
+	#client_key=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.client."private-key"'`
 	echo "Client certificate: ${client_key}"
 	echo ${client_key} > $sandbox/client-private-key.pem
 	
 	# Write server certificate to file
-	server_cert=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.server'`
+	#server_cert=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.server.'`
 	echo "Server certificate: ${server_cert}"
 	echo ${server_cert} > $sandbox/server-certificate.pem
 	
+	# Label
+	#VLabel=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.server.'`
+		
+	#members
+	#Vmember=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.server.'`
+	
+	#Server name
+	#servername=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.server.'`
 			
+			
+	# TO DO
 	
 	cat > $sandbox/Chrystoki.conf << EOF
 Chrystoki2 = {
@@ -163,15 +173,15 @@ LunaSA Client = {
 	ServerCAFile      = 'server-certificates.pem'
 };
 
-ServerName = '';
-ServerPort = 1792;
-ServerHtl = 0;
+ServerName00 = '${servername}';
+ServerPort00 = 1792;
+ServerHtl00 = 0;
 
 VirtualToken = {
 
-	VirtualToken Label = ;
-	VirtualToken SN = ;
-	Virtual Members = ,};
+	VirtualToken00Label = ${VLabel};
+	VirtualToken00SN = 1;
+	Virtual00Members = ${Vmember};
 
 }
 
