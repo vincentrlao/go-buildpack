@@ -128,7 +128,7 @@ configure_luna() {
 	
 	#Build environment
 	sandbox="${build}/lib"
-	htldir="${HOME}/app/lib/htl"
+	
 	
 	vcap_json=${VCAP_SERVICES}
 	echo "------------------------------"
@@ -166,29 +166,35 @@ configure_luna() {
 	cp ${scriptDir}/../linux-amd64/bin/testlunago ${build}/lib
 	
 	# 
+	htldir="lib/htl"
 	
 	cat > ${sandbox}/Chrystoki.conf << EOF
 
+Luna = {
+CloningCommandTimeOut = 300000;
+CommandTimeOutPedSet = 720000;
+DefaultTimeOut = 500000;
+KeypairGenTimeOut = 2700000;
+PEDTimeout1 = 100000;
+PEDTimeout2 = 200000;
+PEDTimeout3 = 10000;
+}	
+
+Misc = {
+PE1746Enabled = 0;
+}
+	
+	
 Chrystoki2 = {
-LibUNIX64 = ${HOME}/app/lib/libs/64/libcklog2.so;
+LibUNIX64 = lib/libs/64/libCryptoki2.so;
 }
-
-CkLog2 = {
-Enabled = 1;
-LibUNIX64 = ${HOME}/app/lib/libs/64/libCryptoki2.so;
-LoggingMask = ALL_FUNC;
-LogToStreams = 1;
-NewFormat = 1;
-}
-
-
 
 LunaSA Client = {
 NetClient = 1;
-ClientCertFile = ${HOME}/app/lib/client-certificate.pem;
-ClientPrivKeyFile = ${HOME}/app/lib/client-private-key.pem;
+ClientCertFile = lib/client-certificate.pem;
+ClientPrivKeyFile = lib/client-private-key.pem;
 HtlDir = ${htldir};
-ServerCAFile = ${HOME}/app/lib/server-certificates.pem;
+ServerCAFile = lib/server-certificates.pem;
 };
 
 ServerName00 = ${servername};
