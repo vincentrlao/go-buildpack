@@ -134,28 +134,28 @@ configure_luna() {
 	echo "------------------------------"
 	
 	# Write client certificate to file
-	#client_cert=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.client.certificate'`
+	client_cert=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.client.certificate'`
 	echo "Client certificate: ${client_cert}"
 	echo ${client_cert} > $sandbox/client-certificate.pem
 	
 	# Write client private key to file
-	#client_key=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.client."private-key"'`
+	client_key=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.client."private-key"'`
 	echo "Client certificate: ${client_key}"
 	echo ${client_key} > $sandbox/client-private-key.pem
 	
 	# Write server certificate to file
-	#server_cert=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.server.'`
+	server_cert=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.servers[].certificate'`
 	echo "Server certificate: ${server_cert}"
 	echo ${server_cert} > $sandbox/server-certificate.pem
 	
 	# Label
-	#VLabel=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.server.'`
+	VLabel=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.groups[].label'`
 		
 	#members
-	#Vmember=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.server.'`
+	Vmember=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.groups[].members[]'`
 	
 	#Server name
-	#servername=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.server.'`
+	servername=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.servers[].name'`
 			
 			
 	# TO DO
