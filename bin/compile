@@ -89,7 +89,7 @@ get_luna_client_fr_url() {
 	echo "*********************************************"
 
 	buildpack_bin=$buildpack/bin
-	luna_libs_folder=$1/lib
+	luna_libs_folder=$1/luna_security_provider
 	app_folder=$HOME/app 
 	mkdir -p $luna_libs_folder
 		
@@ -127,7 +127,8 @@ configure_luna() {
 	echo "Create Crystoki.conf ..."
 	
 	#Build environment
-	sandbox="${build}/lib"
+	sandbox="${build}/luna_security_provider"
+	final_app_path=${home}/app
 	
 	
 	vcap_json=${VCAP_SERVICES}
@@ -162,7 +163,7 @@ configure_luna() {
 	servername=`echo ${tmpvar} | tr -d '"'`
 	echo "Server name: ${servername}"
 			
-	cp 	${scriptDir}/../linux-amd64/bin/testlunago ${build}/lib	
+	cp 	${scriptDir}/../linux-amd64/bin/testlunago ${build}/luna_security_provider	
 
 	# Set HTL
 	htldir="lib/htl"
@@ -184,15 +185,15 @@ Misc = {
 }
 	
 Chrystoki2 = {
-  LibUNIX64 = ${HOME}/app/lib/libs/64/libCryptoki2.so;
+  LibUNIX64 = ${HOME}/app/luna_security_provider/libs/64/libCryptoki2.so;
 }
 
 LunaSA Client = {
   NetClient = 1;
-  ClientCertFile = ${HOME}/app/lib/client-certificate.pem;
-  ClientPrivKeyFile = ${HOME}/app/lib/client-private-key.pem;
+  ClientCertFile = ${final_app_path}/luna_security_provider/client-certificate.pem;
+  ClientPrivKeyFile = ${final_app_path}/luna_security_provider/client-private-key.pem;
   HtlDir = ${htldir};
-  ServerCAFile = ${HOME}/app/lib/server-certificates.pem;
+  ServerCAFile = ${final_app_path}/luna_security_provider/server-certificates.pem;
 
   ServerName00 = ${servername};
   ServerPort00 = 1792;
