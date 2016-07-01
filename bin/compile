@@ -568,7 +568,7 @@ scriptfolder=`dirname $0`
 echo "Scripts folder: $scriptfolder"
 echo "----------------------------"
 
-configure_luna
+#configure_luna
 
 rm -rf $build/.heroku
 
