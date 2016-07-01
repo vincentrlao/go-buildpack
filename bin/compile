@@ -183,7 +183,6 @@ Misc = {
 PE1746Enabled = 0;
 }
 	
-	
 Chrystoki2 = {
 LibUNIX64 = lib/libs/64/libCryptoki2.so;
 }
@@ -216,6 +215,8 @@ EOF
 	
 	echo "Chrystoki file generated."
 	echo "******************************"
+	
+	cat ${sandbox}/Chrystoki.conf
 
 }
 
