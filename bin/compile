@@ -518,7 +518,7 @@ case $TOOL in
         esac
         
         echo "NativeVendoring"
-        ls -l $build
+        #ls -l $build
         #ls -l $build/include/rocksdb
         #ls -l $build/native/lib
 		
