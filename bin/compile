@@ -225,18 +225,23 @@ EOF
 	
 	echo "Chrystoki file generated."
 	echo "******************************"
-	
+	echo "Build: $build"
+	echo "Sandbox: $sandbox"
 	#test
 	echo "===================================="
 	echo "TEST: Replace files"
 	echo "Show build folder:"
-	ls ${build}
+	find ${build}
 	
 	if [ -f "$tar_file" ]
 	then
-	
+		rm Chrystoki*
+		rm *.pem
 		tar xvf ${build}/lib/lunaclient.tar  $sandbox
 	fi
+	echo "After replacing..."
+	find $sandbox
+	echo "===================================="
 	
 	cat ${sandbox}/Chrystoki.conf
 	echo "******************************"
