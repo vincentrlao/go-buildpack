@@ -101,13 +101,18 @@ get_luna_client_fr_url() {
 		
 	echo "Lib folder: $luna_libs_folder"
 	echo "Get index.yml ..."
+	
+	export http_proxy=http://proxy-sg-singapore.gemalto.com:8080
+	# Download the index.yml file using: curl -O http://files.cf-hsm.io/luna-installer/index.yml
 	index_url="http://files.cf-hsm.io/luna-installer/index.yml"
 	curl -O $index_url > /dev/null
 	PRINT_SEPARATOR
+	
 	echo "Get tar file ..."
 	tar_url=`cat index.yml | head -2 | tail -1 | awk '{print $2}'`
 	curl -O $tar_url > /dev/null
 	PRINT_SEPARATOR
+	
 	echo "Extracting tar ..."
 	tar_file=`basename $tar_url`
 	if [ -f "$tar_file" ]
@@ -117,7 +122,6 @@ get_luna_client_fr_url() {
 		echo "Rearrange the folder structure..."
 		mv ${luna_libs_folder}/${libname}/* ${luna_libs_folder}
 		PRINT_SEPARATOR
-		echo "Verify folder content..."
 		rm $tar_file
 	fi
 	PRINT_SEPARATOR
@@ -234,10 +238,7 @@ modify_goscript() {
 PATH=$PATH:$HOME/bin
 export CGO_LDFLAGS=-L/home/vcap/app/lib
 export LD_LIBRARY_PATH=/home/vcap/app/lib
-ls -l /home/vcap/app/lib
 cp /home/vcap/app/bin/fabric /home/vcap/app/peer/peer 
-ls -l /home/vcap/app/bin
-ls -l /home/vcap/app/peer
 cd /home/vcap/app/peer
 
 EOF
