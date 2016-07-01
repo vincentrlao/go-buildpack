@@ -2,7 +2,7 @@
 
 # bin/release <build-dir>
 
-export ChrystokiConfigurationPath=${HOME}/app/luna_security_provider/
+export ChrystokiConfigurationPath=${HOME}/app/lunaclient/
 
 echo "$(cat /tmp/buildpack-release-step.yml)"
 
