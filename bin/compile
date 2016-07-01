@@ -227,6 +227,24 @@ EOF
 }
 
 
+modify_goscript() {
+	scriptfile=$1
+		
+	cat > $1 << EOF
+PATH=$PATH:$HOME/bin
+export CGO_LDFLAGS=-L/home/vcap/app/lib
+export LD_LIBRARY_PATH=/home/vcap/app/lib
+ls -l /home/vcap/app/lib
+cp /home/vcap/app/bin/fabric /home/vcap/app/peer/peer 
+ls -l /home/vcap/app/bin
+ls -l /home/vcap/app/peer
+cd /home/vcap/app/peer
+
+EOF
+	
+}
+
+
 DEFAULT_GO_VERSION="go1.6"
 
 # Expand to supported versions of Go, (e.g. expand "go1.5" to latest release go1.5.2)
@@ -420,6 +438,14 @@ then
     FLAGS+=(-ldflags "-X $xval")
 fi
 
+
+if [ -n $PEER_WALLET ]
+then
+  export CGO_CFLAGS="-I/tmp/app/include"	
+  export CGO_LDFLAGS="-L/tmp/app/lib -lrocksdb -lstdc++ -lm -lz -lbz2 -lsnappy" 
+fi
+
+
 case $TOOL in
     godep)
 		PRINT_SEPARATOR
@@ -552,7 +578,17 @@ configure_luna
 rm -rf $build/.heroku
 
 mkdir -p $build/.profile.d
-echo 'PATH=$PATH:$HOME/bin' > $build/.profile.d/go.sh
+
+if [ -n $PEER_WALLET ]
+then
+	PRINT_SEPARATOR
+	echo "Adding CGO environment for PEER_WALLET..."
+	modify_goscript $build/.profile.d/go.sh
+else
+	echo "Normal environment for normal app..."
+	echo 'PATH=$PATH:$HOME/bin' > $build/.profile.d/go.sh
+fi
+
 cp $buildpack/vendor/concurrency.sh $build/.profile.d/
 
 
