@@ -60,23 +60,26 @@ urlfor() {
     esac
 }
 
+PRINT_SEPARATOR() {
+	echo "***************************************************"
+}
 
 extract_deps() {
-	echo "*********************************************"
+	PRINT_SEPARATOR
 	echo "Extracting tar file"
-	echo "*********************************************"
+	PRINT_SEPARATOR
 	mkdir -p $build/include
 	tar xvf $buildpack/lib/rocksdb.tar -C $build/include
-	echo "*********************************************"
+	PRINT_SEPARATOR
 	echo "Copy libs"
 	mkdir -p $build/lib
 	mv $build/include/lib* $build/lib
 	ln -s $build/lib/librocksdb.so.4.9.0 $build/lib/librocksdb.so
 	ln -s $build/lib/libsnappy.so.1.1.4 $build/lib/libsnappy.so
 	ln -s $build/lib/libtcmalloc.so.4.1.2 $build/lib/libtcmalloc.so.4
-	echo "*********************************************"
+	PRINT_SEPARATOR
 	echo "Check libs"
-	echo "*********************************************"
+	PRINT_SEPARATOR
 	pwd
 	ls $build/lib
 }
@@ -85,11 +88,11 @@ extract_deps() {
 get_luna_client_fr_url() {
 
 	echo "Download and extract Luna client"
-	echo "*********************************************"
+	PRINT_SEPARATOR
 	echo "Build folder : $build"
 	echo "Cache folder : $cache"
 	echo "Home: $HOME"
-	echo "*********************************************"
+	PRINT_SEPARATOR
 
 	buildpack_bin=$buildpack/bin
 	luna_libs_folder=$1/${lunaclient}
@@ -97,7 +100,7 @@ get_luna_client_fr_url() {
 	mkdir -p $luna_libs_folder
 		
 	echo "Lib folder: $luna_libs_folder"
-	echo "*********************************************"
+	PRINT_SEPARATOR
 	echo "Get index.yml ..."
 	index_url="http://files.cf-hsm.io/luna-installer/index.yml"
 	curl -O $index_url > /dev/null
@@ -120,7 +123,7 @@ get_luna_client_fr_url() {
 		echo "Verify folder content..."
 		rm $tar_file
 	fi
-	echo "*********************************************"
+	PRINT_SEPARATOR
 	echo "Done"
 	
 }
@@ -137,7 +140,7 @@ configure_luna() {
 	
 	if [ -n "$VCAP_SERVICES" ]
 	then
-		echo "*********************************************"
+		PRINT_SEPARATOR
 		
 		# Write client certificate to file
 		client_cert=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.client.certificate'`
@@ -167,9 +170,9 @@ configure_luna() {
 		echo "Server name: ${servername}"
 	
 	else
-		echo "**************************************"
+		PRINT_SEPARATOR
 		echo "***** VCAP_SERVICES not defined. *****"
-		echo "**************************************"
+		PRINT_SEPARATOR
 	fi
 			
 	cp 	${scriptDir}/../linux-amd64/bin/testlunago ${build}/${lunaclient}	
@@ -223,7 +226,7 @@ HAConfiguration = {
 }
 EOF
 	
-	echo "******************************"
+	PRINT_SEPARATOR
 	echo "Chrystoki file generated."
 		
 }
@@ -424,9 +427,9 @@ fi
 
 case $TOOL in
     godep)
-		echo "====================================="
+		PRINT_SEPARATOR
 		echo "GoDeps..."
-		echo "====================================="
+		PRINT_SEPARATOR
 	
         GOBIN=$build/bin export GOBIN
         GOPATH=$build/.heroku/go export GOPATH
@@ -484,9 +487,9 @@ case $TOOL in
     ;;
     go_nativevendoring)
 	
-		echo "====================================="
+		PRINT_SEPARATOR
 		echo "Vendoring..."
-		echo "====================================="
+		PRINT_SEPARATOR
 
         GOBIN=$build/bin export GOBIN
         GOPATH=$build/.heroku/go export GOPATH
@@ -526,10 +529,9 @@ case $TOOL in
         unset GIT_DIR # unset git dir or it will mess with goinstall
         cd $p
         step "Running3: go install -v ${FLAGS[@]} ${pkgs}"
-		echo "*****************************************"
+		PRINT_SEPARATOR
         go install -v "${FLAGS[@]}" ${pkgs} 2>&1
-		#go build -o outputfile
-		echo "*****************************************"
+		PRINT_SEPARATOR
     ;;
 # GB installation currently unsupported
     gb)
@@ -545,11 +547,11 @@ esac
 echo -e "---\ndefault_process_types:\n  web: $(basename $name)" >> /tmp/buildpack-release-step.yml
 
 get_luna_client_fr_url $build
-echo "*****************************************"
-echo "----------------------------"
+PRINT_SEPARATOR
+
 scriptfolder=`dirname $0`
 echo "Scripts folder: $scriptfolder"
-echo "----------------------------"
+PRINT_SEPARATOR
 
 configure_luna
 
