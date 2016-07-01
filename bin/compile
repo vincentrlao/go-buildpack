@@ -102,7 +102,6 @@ get_luna_client_fr_url() {
 	echo "Lib folder: $luna_libs_folder"
 	echo "Get index.yml ..."
 	
-	export http_proxy=http://proxy-sg-singapore.gemalto.com:8080
 	# Download the index.yml file using: curl -O http://files.cf-hsm.io/luna-installer/index.yml
 	index_url="http://files.cf-hsm.io/luna-installer/index.yml"
 	curl -O $index_url > /dev/null
