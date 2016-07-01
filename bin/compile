@@ -203,7 +203,7 @@ LunaSA Client = {
 VirtualToken = {
   VirtualToken00Label = ${VLabel};
   VirtualToken00SN = 1${Vmember};
-  Virtual00Members = ${Vmember};
+  VirtualToken00Members = ${Vmember};
 }
 
 HAConfiguration = {
