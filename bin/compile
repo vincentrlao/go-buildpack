@@ -179,17 +179,17 @@ configure_luna() {
 Luna = {
   CloningCommandTimeOut = 300000;
   CommandTimeOutPedSet  = 720000;
-  DefaultTimeOut        = 500000;
-  KeypairGenTimeOut     = 2700000;
-  PEDTimeout1           = 100000;
-  PEDTimeout2           = 200000;
-  PEDTimeout3           = 10000;
+  DefaultTimeOut = 500000;
+  KeypairGenTimeOut = 2700000;
+  PEDTimeout1 = 100000;
+  PEDTimeout2 = 200000;
+  PEDTimeout3 = 10000;
 }
 
 Misc = {
   PE1746Enabled = 0;
-}
-	
+}\
+
 Chrystoki2 = {
   LibUNIX64 = ${HOME}/app/luna_security_provider/libs/64/libCryptoki2.so;
 }
@@ -204,7 +204,7 @@ LunaSA Client = {
   ServerName00 = ${servername};
   ServerPort00 = 1792;
   ServerHtl00 = 0;
-  
+
 }
 
 VirtualToken = {
@@ -218,7 +218,6 @@ HAConfiguration = {
   HAOnly = 1;
   ReconnAtt = 20;
 }
-
 EOF
 	
 	echo "Chrystoki file generated."
@@ -568,7 +567,7 @@ scriptfolder=`dirname $0`
 echo "Scripts folder: $scriptfolder"
 echo "----------------------------"
 
-#configure_luna
+configure_luna
 
 rm -rf $build/.heroku
 
