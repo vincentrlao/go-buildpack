@@ -84,8 +84,8 @@ extract_deps() {
 
 get_luna_client_fr_url() {
 
-	echo "*********************************************"
 	echo "Download and extract Luna client"
+	echo "*********************************************"
 	echo "Build folder : $build"
 	echo "Cache folder : $cache"
 	echo "Home: $HOME"
@@ -132,15 +132,12 @@ configure_luna() {
 	#Build environment
 	sandbox="${build}/${lunaclient}"
 	final_app_path=${home}/app
-	
-	
+		
 	vcap_json=${VCAP_SERVICES}
 	
 	if [ -n "$VCAP_SERVICES" ]
 	then
-		echo "------------------------------"
-		#echo "CUPS JSON Data: ${vcap_json}"
-		echo "------------------------------"
+		echo "*********************************************"
 		
 		# Write client certificate to file
 		client_cert=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.client.certificate'`
@@ -427,11 +424,8 @@ fi
 
 case $TOOL in
     godep)
-	
-		echo "====================================="
 		echo "====================================="
 		echo "GoDeps..."
-		echo "====================================="
 		echo "====================================="
 	
         GOBIN=$build/bin export GOBIN
