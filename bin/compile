@@ -166,7 +166,7 @@ configure_luna() {
 	cp 	${scriptDir}/../linux-amd64/bin/testlunago ${build}/luna_security_provider	
 
 	# Set HTL
-	htldir="lib/htl"
+	htldir="luna_security_provider/htl"
 	
 	cat > ${sandbox}/Chrystoki.conf << EOF
 
@@ -190,10 +190,10 @@ Chrystoki2 = {
 
 LunaSA Client = {
   NetClient = 1;
-  ClientCertFile = ${final_app_path}/luna_security_provider/client-certificate.pem;
-  ClientPrivKeyFile = ${final_app_path}/luna_security_provider/client-private-key.pem;
+  ClientCertFile = luna_security_provider/client-certificate.pem;
+  ClientPrivKeyFile = luna_security_provider/client-private-key.pem;
   HtlDir = ${htldir};
-  ServerCAFile = ${final_app_path}/luna_security_provider/server-certificates.pem;
+  ServerCAFile = luna_security_provider/server-certificates.pem;
 
   ServerName00 = ${servername};
   ServerPort00 = 1792;
@@ -219,7 +219,12 @@ EOF
 	echo "******************************"
 	
 	cat ${sandbox}/Chrystoki.conf
-
+	echo "******************************"
+	echo "******************************"
+	echo "******************************"
+	echo "******************************"
+	echo "******************************"
+	find ${sandbox}
 }
 
 
