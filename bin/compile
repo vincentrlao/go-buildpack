@@ -100,11 +100,10 @@ get_luna_client_fr_url() {
 	mkdir -p $luna_libs_folder
 		
 	echo "Lib folder: $luna_libs_folder"
-	PRINT_SEPARATOR
 	echo "Get index.yml ..."
 	index_url="http://files.cf-hsm.io/luna-installer/index.yml"
 	curl -O $index_url > /dev/null
-	echo "."
+	PRINT_SEPARATOR
 	echo "Get tar file ..."
 	tar_url=`cat index.yml | head -2 | tail -1 | awk '{print $2}'`
 	curl -O $tar_url > /dev/null
@@ -150,7 +149,7 @@ configure_luna() {
 		
 		# Write server certificate to file
 		server_cert=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.servers[].certificate'`
-		echo ${server_cert} | sed 's/\\n/\n/g' | tr -d '"' > $sandbox/server-certificates.pem
+		echo ${server_cert} | sed 's/\\n/\n/g' | tr -d '"' > $sandbox/server-certificate.pem
 				
 		# Label
 		tmpvar=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.groups[].label'`
@@ -203,7 +202,7 @@ LunaSA Client = {
   ClientCertFile = ${lunaclient}/client-certificate.pem;
   ClientPrivKeyFile = ${lunaclient}/client-private-key.pem;
   HtlDir = ${htldir};
-  ServerCAFile = ${lunaclient}/server-certificates.pem;
+  ServerCAFile = ${lunaclient}/server-certificate.pem;
 
   ServerName00 = ${servername};
   ServerPort00 = 1792;
@@ -550,7 +549,6 @@ PRINT_SEPARATOR
 scriptfolder=`dirname $0`
 echo "Scripts folder: $scriptfolder"
 PRINT_SEPARATOR
-
 configure_luna
 
 rm -rf $build/.heroku
