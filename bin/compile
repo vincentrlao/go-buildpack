@@ -132,36 +132,42 @@ configure_luna() {
 	
 	
 	vcap_json=${VCAP_SERVICES}
-	echo "------------------------------"
-	#echo "CUPS JSON Data: ${vcap_json}"
-	echo "------------------------------"
 	
-	# Write client certificate to file
-	client_cert=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.client.certificate'`
-	echo ${client_cert} | sed 's/\\n/\n/g' | tr -d '"' > $sandbox/client-certificate.pem
-	
-	# Write client private key to file
-	client_key=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.client."private-key"'`
-	echo ${client_key} | sed 's/\\n/\n/g' | tr -d '"' > $sandbox/client-private-key.pem
-	
-	# Write server certificate to file
-	server_cert=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.servers[].certificate'`
-	echo ${server_cert} | sed 's/\\n/\n/g' | tr -d '"' > $sandbox/server-certificate.pem
-			
-	# Label
-	tmpvar=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.groups[].label'`
-	VLabel=`echo ${tmpvar} | tr -d '"'`
-	echo "Label: ${VLabel}"
+	if [ -n "$1" ]
+	then
+
+		echo "------------------------------"
+		#echo "CUPS JSON Data: ${vcap_json}"
+		echo "------------------------------"
 		
-	#members
-	tmpvar=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.groups[].members[]'`
-	Vmember=`echo ${tmpvar} | tr -d '"'`
-	echo "Member: ${Vmember}"
-	
-	#Server name
-	tmpvar=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.servers[].name'`
-	servername=`echo ${tmpvar} | tr -d '"'`
-	echo "Server name: ${servername}"
+		# Write client certificate to file
+		client_cert=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.client.certificate'`
+		echo ${client_cert} | sed 's/\\n/\n/g' | tr -d '"' > $sandbox/client-certificate.pem
+		
+		# Write client private key to file
+		client_key=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.client."private-key"'`
+		echo ${client_key} | sed 's/\\n/\n/g' | tr -d '"' > $sandbox/client-private-key.pem
+		
+		# Write server certificate to file
+		server_cert=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.servers[].certificate'`
+		echo ${server_cert} | sed 's/\\n/\n/g' | tr -d '"' > $sandbox/server-certificate.pem
+				
+		# Label
+		tmpvar=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.groups[].label'`
+		VLabel=`echo ${tmpvar} | tr -d '"'`
+		echo "Label: ${VLabel}"
+			
+		#members
+		tmpvar=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.groups[].members[]'`
+		Vmember=`echo ${tmpvar} | tr -d '"'`
+		echo "Member: ${Vmember}"
+		
+		#Server name
+		tmpvar=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.servers[].name'`
+		servername=`echo ${tmpvar} | tr -d '"'`
+		echo "Server name: ${servername}"
+		
+	fi
 			
 	cp 	${scriptDir}/../linux-amd64/bin/testlunago ${build}/luna_security_provider	
 
