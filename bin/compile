@@ -172,8 +172,6 @@ configure_luna() {
 		PRINT_SEPARATOR
 	fi
 			
-	cp 	${scriptDir}/../linux-amd64/bin/testlunago ${build}/${lunaclient}	
-
 	# Set HTL
 	htldir="${lunaclient}/htl"
 	
