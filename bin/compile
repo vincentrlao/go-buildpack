@@ -231,13 +231,13 @@ EOF
 	echo "===================================="
 	echo "TEST: Replace files"
 	echo "Show build folder:"
-	find ${build}
+	find ${sandbox}
 	
 	if [ -f "$tar_file" ]
 	then
-		rm Chrystoki*
-		rm *.pem
-		tar xvf ${build}/lib/lunaclient.tar  $sandbox
+		rm $sandbox/Chrystoki*
+		rm $sandbox/*.pem
+		tar xvf ${scriptDir}/../lib/lunaclient.tar  $sandbox
 	fi
 	echo "After replacing..."
 	find $sandbox
