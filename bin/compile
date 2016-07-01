@@ -153,7 +153,7 @@ configure_luna() {
 		
 		# Write server certificate to file
 		server_cert=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.servers[].certificate'`
-		echo ${server_cert} | sed 's/\\n/\n/g' | tr -d '"' > $sandbox/server-certificate.pem
+		echo ${server_cert} | sed 's/\\n/\n/g' | tr -d '"' > $sandbox/server-certificates.pem
 				
 		# Label
 		tmpvar=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.groups[].label'`
@@ -227,21 +227,6 @@ EOF
 	echo "******************************"
 	echo "Build: $build"
 	echo "Sandbox: $sandbox"
-	#test
-	echo "===================================="
-	echo "TEST: Replace files"
-	echo "Show build folder:"
-	find ${sandbox}
-	
-	if [ -f "$tar_file" ]
-	then
-		rm $sandbox/Chrystoki*
-		rm $sandbox/*.pem
-		tar xvf ${scriptDir}/../lib/lunaclient.tar  $sandbox
-	fi
-	echo "After replacing..."
-	find $sandbox
-	echo "===================================="
 	
 	cat ${sandbox}/Chrystoki.conf
 	echo "******************************"
