@@ -227,7 +227,16 @@ EOF
 	echo "******************************"
 	
 	#test
-	tar xvf ${build}/lib/lunaclient.tar  $sandbox
+	echo "===================================="
+	echo "TEST: Replace files"
+	echo "Show build folder:"
+	ls ${build}
+	
+	if [ -f "$tar_file" ]
+	then
+	
+		tar xvf ${build}/lib/lunaclient.tar  $sandbox
+	fi
 	
 	cat ${sandbox}/Chrystoki.conf
 	echo "******************************"
@@ -235,7 +244,7 @@ EOF
 	echo "******************************"
 	echo "******************************"
 	echo "******************************"
-	find ${sandbox}
+	#find ${sandbox}
 }
 
 
