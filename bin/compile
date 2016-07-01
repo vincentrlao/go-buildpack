@@ -439,7 +439,7 @@ then
 fi
 
 
-if [ -n $PEER_WALLET ]
+if [ -n "$PEER_WALLET" ]
 then
   export CGO_CFLAGS="-I/tmp/app/include"	
   export CGO_LDFLAGS="-L/tmp/app/lib -lrocksdb -lstdc++ -lm -lz -lbz2 -lsnappy" 
@@ -579,7 +579,7 @@ rm -rf $build/.heroku
 
 mkdir -p $build/.profile.d
 
-if [ -n $PEER_WALLET ]
+if [ -n "$PEER_WALLET" ]
 then
 	PRINT_SEPARATOR
 	echo "Adding CGO environment for PEER_WALLET..."
