@@ -108,7 +108,7 @@ get_luna_client_fr_url() {
 	echo "Get tar file ..."
 	tar_url=`cat index.yml | head -2 | tail -1 | awk '{print $2}'`
 	curl -O $tar_url > /dev/null
-	echo "."
+	PRINT_SEPARATOR
 	echo "Extracting tar ..."
 	tar_file=`basename $tar_url`
 	if [ -f "$tar_file" ]
@@ -117,9 +117,7 @@ get_luna_client_fr_url() {
 		libname=`ls ${luna_libs_folder}` 
 		echo "Rearrange the folder structure..."
 		mv ${luna_libs_folder}/${libname}/* ${luna_libs_folder}
-		echo "*********************************************"
-		#ls ${luna_libs_folder}
-		echo "."
+		PRINT_SEPARATOR
 		echo "Verify folder content..."
 		rm $tar_file
 	fi
