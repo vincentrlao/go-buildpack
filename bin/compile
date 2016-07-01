@@ -133,7 +133,7 @@ configure_luna() {
 	
 	vcap_json=${VCAP_SERVICES}
 	
-	if [ -n "$vcap_json" ]
+	if [ -n "$VCAP_SERVICES" ]
 	then
 
 		echo "------------------------------"
