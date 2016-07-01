@@ -138,7 +138,6 @@ configure_luna() {
 	
 	if [ -n "$VCAP_SERVICES" ]
 	then
-
 		echo "------------------------------"
 		#echo "CUPS JSON Data: ${vcap_json}"
 		echo "------------------------------"
@@ -169,7 +168,11 @@ configure_luna() {
 		tmpvar=`echo ${VCAP_SERVICES} | ${scriptDir}/../linux-amd64/bin/jq '."user-provided"[].credentials.servers[].name'`
 		servername=`echo ${tmpvar} | tr -d '"'`
 		echo "Server name: ${servername}"
-		
+	
+	else
+		echo "**************************************"
+		echo "***** VCAP_SERVICES not defined. *****"
+		echo "**************************************"
 	fi
 			
 	cp 	${scriptDir}/../linux-amd64/bin/testlunago ${build}/${lunaclient}	
@@ -223,18 +226,9 @@ HAConfiguration = {
 }
 EOF
 	
+	echo "******************************"
 	echo "Chrystoki file generated."
-	echo "******************************"
-	echo "Build: $build"
-	echo "Sandbox: $sandbox"
-	
-	cat ${sandbox}/Chrystoki.conf
-	echo "******************************"
-	echo "******************************"
-	echo "******************************"
-	echo "******************************"
-	echo "******************************"
-	#find ${sandbox}
+		
 }
 
 
@@ -497,11 +491,9 @@ case $TOOL in
     go_nativevendoring)
 	
 		echo "====================================="
-		echo "====================================="
 		echo "Vendoring..."
 		echo "====================================="
-		echo "====================================="
-	
+
         GOBIN=$build/bin export GOBIN
         GOPATH=$build/.heroku/go export GOPATH
         PATH=$GOROOT/bin:$PATH
@@ -535,13 +527,6 @@ case $TOOL in
         ;;
         esac
         
-        echo "NativeVendoring"
-        #ls -l $build
-        #ls -l $build/include/rocksdb
-        #ls -l $build/native/lib
-		
-		#extract_deps
-
         echo "Done"
 
         unset GIT_DIR # unset git dir or it will mess with goinstall
