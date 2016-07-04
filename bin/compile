@@ -64,25 +64,25 @@ PRINT_SEPARATOR() {
 	echo "***************************************************"
 }
 
-extract_deps() {
-	PRINT_SEPARATOR
-	echo "Extracting tar file"
-	PRINT_SEPARATOR
-	mkdir -p $build/include
-	tar xvf $buildpack/lib/rocksdb.tar -C $build/include
-	PRINT_SEPARATOR
-	echo "Copy libs"
-	mkdir -p $build/lib
-	mv $build/include/lib* $build/lib
-	ln -s $build/lib/librocksdb.so.4.9.0 $build/lib/librocksdb.so
-	ln -s $build/lib/libsnappy.so.1.1.4 $build/lib/libsnappy.so
-	ln -s $build/lib/libtcmalloc.so.4.1.2 $build/lib/libtcmalloc.so.4
-	PRINT_SEPARATOR
-	echo "Check libs"
-	PRINT_SEPARATOR
-	pwd
-	ls $build/lib
-}
+#extract_deps() {
+#	PRINT_SEPARATOR
+#	echo "Extracting tar file"
+#	PRINT_SEPARATOR
+#	mkdir -p $build/include
+#	tar xvf $buildpack/lib/rocksdb.tar -C $build/include
+#	PRINT_SEPARATOR
+#	echo "Copy libs"
+#	mkdir -p $build/lib
+#	mv $build/include/lib* $build/lib
+#	ln -s $build/lib/librocksdb.so.4.9.0 $build/lib/librocksdb.so
+#	ln -s $build/lib/libsnappy.so.1.1.4 $build/lib/libsnappy.so
+#	ln -s $build/lib/libtcmalloc.so.4.1.2 $build/lib/libtcmalloc.so.4
+#	PRINT_SEPARATOR
+#	echo "Check libs"
+#	PRINT_SEPARATOR
+#	pwd
+#	ls $build/lib
+#}
 
 
 get_luna_client_fr_url() {
@@ -92,6 +92,9 @@ get_luna_client_fr_url() {
 	echo "Build folder : $build"
 	echo "Cache folder : $cache"
 	echo "Home: $HOME"
+	echo "GOROOT: $GOROOT"
+	echo "GOPATH: $GOPATH"
+
 	PRINT_SEPARATOR
 
 	buildpack_bin=$buildpack/bin
@@ -234,11 +237,23 @@ modify_goscript() {
 	scriptfile=$1
 		
 	cat > $1 << EOF
+echo "************************************"
+echo "************************************"
+echo "Running goscript"
+echo "************************************"
 PATH=$PATH:$HOME/bin
 export CGO_LDFLAGS=-L/home/vcap/app/lib
 export LD_LIBRARY_PATH=/home/vcap/app/lib
 cp /home/vcap/app/bin/fabric /home/vcap/app/peer/peer 
+
 cd /home/vcap/app/peer
+
+echo ">>>>>>>>>>>>>>>>>>>>>"
+ls -l /home/vcap/app
+echo ">>>>>>>>>>>>>>>>>>>>>"
+ls -l /home/vcap/app/bin
+echo ">>>>>>>>>>>>>>>>>>>>>"
+ls -l /home/vcap/app/peer
 
 EOF
 	
@@ -337,19 +352,6 @@ then
     done
 fi
 
-#export CGO_CFLAGS="/home/vcap/app/include"
-#export CGO_LDFLAGS="/home/vcap/app/native/lib/librocksdb.so"
-
-export CGO_CFLAGS="-I/tmp/app/include"
-export CGO_LDFLAGS="-L/tmp/app/native/lib -L/home/vcap/app/native/lib"
-#export CGO_LDFLAGS="CGO_LDFLAGS:-lrocksdb -lstdc++ -lm -lz -lbz2 -lsnappy"
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/home/vcap/app/native/lib"
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/tmp/app/native/lib"
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$build/lib"
-
-export LIBRARY_PATH="$LIBRARY_PATH:/home/vcap/app/native/lib"
-export LIBRARY_PATH="$LIBRARY_PATH:/tmp/app/native/lib"
-export LIBRARY_PATH="$LIBRARY_PATH:$build/lib"
 
 if test -f "$build/Godeps/Godeps.json"
 then
@@ -441,6 +443,7 @@ fi
 
 if [ -n "$PEER_WALLET" ]
 then
+  echo "Set PEER WALLET configuration path"
   export CGO_CFLAGS="-I/tmp/app/include"	
   export CGO_LDFLAGS="-L/tmp/app/lib -lrocksdb -lstdc++ -lm -lz -lbz2 -lsnappy" 
 fi
@@ -590,7 +593,4 @@ else
 fi
 
 cp $buildpack/vendor/concurrency.sh $build/.profile.d/
-
-
-
 
