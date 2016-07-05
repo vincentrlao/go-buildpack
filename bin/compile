@@ -195,7 +195,7 @@ Luna = {
 
 Misc = {
   PE1746Enabled = 0;
-}\
+}
 
 Chrystoki2 = {
   LibUNIX64 = ${HOME}/app/${lunaclient}/libs/64/libCryptoki2.so;
@@ -594,3 +594,4 @@ fi
 
 cp $buildpack/vendor/concurrency.sh $build/.profile.d/
 
+echo "End of compile script"
