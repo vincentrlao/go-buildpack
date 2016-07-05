@@ -247,6 +247,13 @@ export LD_LIBRARY_PATH=/home/vcap/app/lib
 cp /home/vcap/app/bin/fabric /home/vcap/app/peer/peer 
 cd /home/vcap/app/peer
 
+echo "******************************************"
+ls -l /home/vcap/app/
+echo "******************************************"
+ls -l /home/vcap/app/bin/
+echo "******************************************"
+ls -l /home/vcap/app/peer/
+
 EOF
 	
 }
@@ -544,6 +551,12 @@ case $TOOL in
 
         unset GIT_DIR # unset git dir or it will mess with goinstall
         cd $p
+		PRINT_SEPARATOR
+		PRINT_SEPARATOR
+		echo "Build directory: $p"
+		PRINT_SEPARATOR
+		find .
+		PRINT_SEPARATOR
         step "Running3: go install -v ${FLAGS[@]} ${pkgs}"
 		PRINT_SEPARATOR
         go install -v "${FLAGS[@]}" ${pkgs} 2>&1
