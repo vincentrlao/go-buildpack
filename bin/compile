@@ -245,15 +245,7 @@ PATH=$PATH:$HOME/bin
 export CGO_LDFLAGS=-L/home/vcap/app/lib
 export LD_LIBRARY_PATH=/home/vcap/app/lib
 cp /home/vcap/app/bin/fabric /home/vcap/app/peer/peer 
-
 cd /home/vcap/app/peer
-
-echo ">>>>>>>>>>>>>>>>>>>>>"
-ls -l /home/vcap/app
-echo ">>>>>>>>>>>>>>>>>>>>>"
-ls -l /home/vcap/app/bin
-echo ">>>>>>>>>>>>>>>>>>>>>"
-ls -l /home/vcap/app/peer
 
 EOF
 	
