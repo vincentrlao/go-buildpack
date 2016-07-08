@@ -64,26 +64,6 @@ PRINT_SEPARATOR() {
 	echo "***************************************************"
 }
 
-#extract_deps() {
-#	PRINT_SEPARATOR
-#	echo "Extracting tar file"
-#	PRINT_SEPARATOR
-#	mkdir -p $build/include
-#	tar xvf $buildpack/lib/rocksdb.tar -C $build/include
-#	PRINT_SEPARATOR
-#	echo "Copy libs"
-#	mkdir -p $build/lib
-#	mv $build/include/lib* $build/lib
-#	ln -s $build/lib/librocksdb.so.4.9.0 $build/lib/librocksdb.so
-#	ln -s $build/lib/libsnappy.so.1.1.4 $build/lib/libsnappy.so
-#	ln -s $build/lib/libtcmalloc.so.4.1.2 $build/lib/libtcmalloc.so.4
-#	PRINT_SEPARATOR
-#	echo "Check libs"
-#	PRINT_SEPARATOR
-#	pwd
-#	ls $build/lib
-#}
-
 
 get_luna_client_fr_url() {
 
@@ -133,7 +113,7 @@ get_luna_client_fr_url() {
 
 
 configure_luna() {
-	echo "Create Crystoki.conf ..."
+	echo "Create Chrystoki.conf ..."
 	
 	#Build environment
 	sandbox="${build}/${lunaclient}"
