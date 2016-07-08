@@ -1,68 +1,50 @@
-# Cloud Foundry Go(Lang) Buildpack
-[![CF Slack](https://s3.amazonaws.com/buildpacks-assets/buildpacks-slack.svg)](http://slack.cloudfoundry.org)
+# Cloud Foundry Go(Lang) Buildpack with Luna HSM Support
 
-A Cloud Foundry [buildpack](http://docs.cloudfoundry.org/buildpacks/) for Go(lang) based apps.
+A Go buildpack with Luna client support (http://github.com/vincentrlao/go-buildpack/) for Go(lang) based apps that uses Luna HSM.
 
-This is based on the [Heroku buildpack] (https://github.com/heroku/heroku-buildpack-go).
+This is based on the cloudfoundry go-buildpack (https://github.com/cloudfoundry/go-buildpack) which is also based on [Heroku buildpack] (https://github.com/heroku/heroku-buildpack-go).
 
-Note that this buildpack is currently 
+Note that this buildpack is currently not intended for public use. It is intended to be used by developers working on a proof-of-concept project.
 
-## Using the Buildpack
 
-For information on deploying Go applications visit [CloudFoundry.org](http://docs.cloudfoundry.org/buildpacks/go/index.html).
 
-## Building the Buildpack
+## Usage
 
-1. Make sure you have fetched submodules
+To use this buildpack, the app manifest must include the buildpack.
 
-  ```bash
-  git submodule update --init
-  ```
+	buildpack: https://github.com/vincentrlao/go-buildpack
 
-1. Get latest buildpack dependencies
+	
+## Configuration
+To use a standard Go app without Luna support, the manifest.yml only requires the following.
 
-  ```shell
-  BUNDLE_GEMFILE=cf.Gemfile bundle
-  ```
+	env:
+		GOVERSION: go1.6
+		GOPACKAGENAME: your-package-name
 
-1. Build the buildpack
+To use this buildpack with Luna support, the following needs to be set in the app manifest.yml.
 
-  ```shell
-  BUNDLE_GEMFILE=cf.Gemfile bundle exec buildpack-packager [ --uncached | --cached ]
-  ```
+	services:
+      - luna
+	env:
+		GOVERSION: go1.6
+		GOPACKAGENAME: your-package-name
+		ChrystokiConfigurationPath: /home/vcap/app/lunaclient
 
-1. Use in Cloud Foundry
+For specific use case (Test Peer-wallet mode), use the following:
 
-  Upload the buildpack to your Cloud Foundry and optionally specify it by name
-
-  ```bash
-  cf create-buildpack custom_go_buildpack go_buildpack-cached-custom.zip 1
-  cf push my_app -b custom_go_buildpack
-  ```
-
-## Testing
-Buildpacks use the [Machete](https://github.com/cloudfoundry/machete) framework for running integration tests.
-
-To test a buildpack, run the following command from the buildpack's directory:
-
-```
-BUNDLE_GEMFILE=cf.Gemfile bundle exec buildpack-build
-```
-
-More options can be found on Machete's [Github page.](https://github.com/cloudfoundry/machete)
-
-## Contributing
-
-Find our guidelines [here](./CONTRIBUTING.md).
-
-## Help and Support
-
-Join the #buildpacks channel in our [Slack community] (http://slack.cloudfoundry.org/) if you need any further assistance.
-
-## Reporting Issues
-
-Please fill out the issue template fully if you'd like to start an issue for the buildpack.
-
-## Active Development
-
-The project backlog is on [Pivotal Tracker](https://www.pivotaltracker.com/projects/1042066)
+	services:
+      - luna
+    env:
+        GOVERSION: go1.6
+        GOPACKAGENAME: github.com/hyperledger/fabric
+        PEER_WALLET: true
+        ChrystokiConfigurationPath: /home/vcap/app/lunaclient
+        timeout: 180
+        no_proxy: xip.io,bosh-lite.com,10.160.1.127
+        NO_PROXY: xip.io,bosh-lite.com,10.160.1.127
+        http_proxy: http://proxy-sg-singapore.gemalto.com:8080
+        https_proxy: http://proxy-sg-singapore.gemalto.com:8080
+        HTTP_PROXY: http://proxy-sg-singapore.gemalto.com:8080
+        HTTPS_PROXY: http://proxy-sg-singapore.gemalto.com:8080
+  
