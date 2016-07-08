@@ -179,7 +179,7 @@ configure_luna() {
 	fi
 			
 	# Set HTL
-	htldir="${lunaclient}/htl"
+	htldir="${HOME}/app/${lunaclient}/htl"
 	
 	cat > ${sandbox}/Chrystoki.conf << EOF
 
