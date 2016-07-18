@@ -121,6 +121,8 @@ configure_luna() {
 		
 	vcap_json=${VCAP_SERVICES}
 	
+	echo "VCAP_SERVICES: ${VCAP_SERVICES}"
+	
 	if [ -n "$VCAP_SERVICES" ]
 	then
 		PRINT_SEPARATOR
